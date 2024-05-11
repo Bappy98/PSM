@@ -57,10 +57,14 @@
             "schema": {
               "$ref": "#definitions/loginResponse"
             }
+          },
+          "400": {
+            "description": "Invalid input"
           }
         }
       }
     },
+
     "/branch/register": {
       "post": {
         "tags": ["Auth"],
@@ -93,6 +97,160 @@
           },
           "400": {
             "description": "Invalid input"
+          }
+        }
+      }
+    },
+
+    "/branch/Create": {
+      "post": {
+        "tags": ["Branch"],
+        "summary": "create a new branch info by super admin",
+        "description": "create a new branch all info by super admin",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Branch",
+            "description": "create a new branch info with the provide information",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Branch create successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/branch": {
+      "get": {
+        "tags": ["Branch"],
+        "summary": "get all branch",
+        "description": "Retrieves a list of all branch",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all Branch"
+          }
+        }
+      }
+    },
+    "/branch/{id}": {
+      "get": {
+        "tags": ["Branch"],
+        "summary": "Get branch by id",
+        "description": "retrieves a single branch by id",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the branch to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single branch"
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "404": {
+            "description": "branch not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Branch"],
+        "summary": "Update branch by ID",
+        "description": "Update single branch information",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the branch to update"
+          },
+          {
+            "in": "body",
+            "name": "branch",
+            "required": true,
+            "type": "object",
+            "description": "branch object with update fields",
+            "schema": {
+              "$ref": "#definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Branch update successfully"
+          },
+          "400": {
+            "description": "Invalid branch supplied"
+          },
+          "404": {
+            "description": "Branch not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Branch"],
+        "summary": "delete branch by ID",
+        "description": "delete a single branch",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the branch to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Branch delete successful"
+          },
+          "404": {
+            "description": "Branch not found"
           }
         }
       }
@@ -160,6 +318,24 @@
           "type": "string"
         },
         "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "Branch": {
+      "type": "object",
+      "required": ["name", "address", "phone", "logo"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "logo": {
           "type": "string"
         }
       }
