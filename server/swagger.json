@@ -1,0 +1,344 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Drug store management api documentations",
+    "version": "1.0.0",
+    "title": "Drug store management API Documentations",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Everything Authentication"
+    },
+    {
+      "name": "Users",
+      "description": "Users related api"
+    }
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter jwt Bearer token as **Bearer &lt; token>**"
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login a single User",
+        "description": "login with email and password",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "login",
+            "description": "login with email and password",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully login",
+            "schema": {
+              "$ref": "#definitions/loginResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+
+    "/branch/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Register a single Branch by superAdmin",
+        "description": "Create a new branch user with the provided information",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "branch user",
+            "description": "User to be registered",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/register"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User registered successfully",
+            "schema": {
+              "$ref": "#definitions/registerResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+
+    "/branch/Create": {
+      "post": {
+        "tags": ["Branch"],
+        "summary": "create a new branch info by super admin",
+        "description": "create a new branch all info by super admin",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Branch",
+            "description": "create a new branch info with the provide information",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Branch create successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/branch": {
+      "get": {
+        "tags": ["Branch"],
+        "summary": "get all branch",
+        "description": "Retrieves a list of all branch",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all Branch"
+          }
+        }
+      }
+    },
+    "/branch/{id}": {
+      "get": {
+        "tags": ["Branch"],
+        "summary": "Get branch by id",
+        "description": "retrieves a single branch by id",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the branch to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single branch"
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "404": {
+            "description": "branch not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Branch"],
+        "summary": "Update branch by ID",
+        "description": "Update single branch information",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the branch to update"
+          },
+          {
+            "in": "body",
+            "name": "branch",
+            "required": true,
+            "type": "object",
+            "description": "branch object with update fields",
+            "schema": {
+              "$ref": "#definitions/Branch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Branch update successfully"
+          },
+          "400": {
+            "description": "Invalid branch supplied"
+          },
+          "404": {
+            "description": "Branch not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Branch"],
+        "summary": "delete branch by ID",
+        "description": "delete a single branch",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the branch to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Branch delete successful"
+          },
+          "404": {
+            "description": "Branch not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "login": {
+      "type": "object",
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "faysal.cse123@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "test123"
+        }
+      }
+    },
+    "loginResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "register": {
+      "type": "object",
+      "required": ["email", "password", "fName", "lName", "userType"],
+      "properties": {
+        "fName": {
+          "type": "string"
+        },
+        "lName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "example": "string@gmail.com"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "string",
+          "example": "user"
+        }
+      }
+    },
+    "registerResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "Branch": {
+      "type": "object",
+      "required": ["name", "address", "phone", "logo"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
