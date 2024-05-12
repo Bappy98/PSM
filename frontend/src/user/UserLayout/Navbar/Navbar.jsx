@@ -90,7 +90,7 @@ const Navbar = () => {
                 className="text-green-500 block lg:hidden"
                 onClick={toggleSidebar}
               >
-                <i className="fa-solid fa-bars"></i>
+                menu
               </li>
             </ul>
           </div>

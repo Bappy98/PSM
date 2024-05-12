@@ -16,7 +16,7 @@ const Sidebar = ({ showSidebar, closeSidebar }) => {
           {/* Close Icon */}
           <div className="flex justify-end">
             <button className="text-green-500" onClick={closeSidebar}>
-              <i className="fa-solid fa-times"></i>
+         close
             </button>
           </div>
           {/* Sidebar Content */}
