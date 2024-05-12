@@ -4,8 +4,9 @@ const {
   getAllBranch,
   updateBranch,
   deleteBranch,
+  findById,
 } = require("../controllers/branchController");
-const { findById } = require("../models/branchModle");
+//const { findById } = require("../models/branchModle");
 const router = express.Router();
 
 router.route("/branch/create").post(createBranch);

@@ -1,3 +1,5 @@
 const Auth = require("./authRoute");
 const Branch = require("./branchRoute");
-module.exports = [Auth, Branch];
+const Company = require("./companyRoute");
+const Generics = require("./genericsRoute");
+module.exports = [Auth, Branch, Company, Generics];

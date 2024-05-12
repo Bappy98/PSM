@@ -254,6 +254,312 @@
           }
         }
       }
+    },
+    "/company/Create": {
+      "post": {
+        "tags": ["Company"],
+        "summary": "create a new company info by super admin",
+        "description": "create a new company all info by super admin",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Company",
+            "description": "create a new company info with the provide information",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Company"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Company create successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/company": {
+      "get": {
+        "tags": ["Company"],
+        "summary": "get all company",
+        "description": "Retrieves a list of all company",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all company"
+          }
+        }
+      }
+    },
+    "/company/{id}": {
+      "get": {
+        "tags": ["Company"],
+        "summary": "Get company by id",
+        "description": "retrieves a single company by id",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the company to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single company"
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Company"],
+        "summary": "Update company by ID",
+        "description": "Update single company information",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the company to update"
+          },
+          {
+            "in": "body",
+            "name": "company",
+            "required": true,
+            "type": "object",
+            "description": "company object with update fields",
+            "schema": {
+              "$ref": "#definitions/Company"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "company update successfully"
+          },
+          "400": {
+            "description": "Invalid company supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Company"],
+        "summary": "delete company by ID",
+        "description": "delete a single company",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the company to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "company delete successful"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/generics/Create": {
+      "post": {
+        "tags": ["Generics"],
+        "summary": "create a new generics info by super admin",
+        "description": "create a new generics all info by super admin",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Generics",
+            "description": "create a new generics info with the provide information",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Generics"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Generics create successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/generics": {
+      "get": {
+        "tags": ["Generics"],
+        "summary": "get all generics",
+        "description": "Retrieves a list of all generics",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all generics"
+          }
+        }
+      }
+    },
+    "/generics/{id}": {
+      "get": {
+        "tags": ["Generics"],
+        "summary": "Get generics by id",
+        "description": "retrieves a single generics by id",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the generics to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single generics"
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "404": {
+            "description": "generics not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Generics"],
+        "summary": "Update generics by ID",
+        "description": "Update single generics information",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the generics to update"
+          },
+          {
+            "in": "body",
+            "name": "generics",
+            "required": true,
+            "type": "object",
+            "description": "generics object with update fields",
+            "schema": {
+              "$ref": "#definitions/Generics"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "generics update successfully"
+          },
+          "400": {
+            "description": "Invalid generics supplied"
+          },
+          "404": {
+            "description": "generics not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Generics"],
+        "summary": "delete generics by ID",
+        "description": "delete a single generics",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the generics to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "generics delete successful"
+          },
+          "404": {
+            "description": "generics not found"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -336,6 +642,36 @@
           "type": "string"
         },
         "logo": {
+          "type": "string"
+        }
+      }
+    },
+    "Company": {
+      "type": "object",
+      "required": ["name", "address", "phone", "logo"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        }
+      }
+    },
+    "Generics": {
+      "type": "object",
+      "required": ["name", "details"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "details": {
           "type": "string"
         }
       }
