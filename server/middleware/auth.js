@@ -30,7 +30,7 @@ const isSuperAdmin = (req, res, next) => {
     next();
   } else {
     res.status(401);
-    throw new Error("Not authorized as a superadmin");
+    throw new Error("Not authorized as a superAdmin");
   }
 };
 
