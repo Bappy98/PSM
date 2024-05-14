@@ -62,6 +62,8 @@ const Login = () => {
                   name="email"
                   label="email"
                   type="text"
+                  
+                  className="w-full px-6 rounded"
                   placeholder="Enter your email"
                   register={register}
                   error={errors.email}
@@ -72,6 +74,7 @@ const Login = () => {
                   name="password"
                   label="password"
                   type="password"
+                  className="w-full px-6 rounded"
                   defaultValue=""
                   placeholder="Enter your password"
                   register={register}

@@ -37,21 +37,21 @@ const TextInput = ({
 
   return (
     <div
-      className={`fromGroup  ${error ? "has-error" : ""}  ${
+      className={`fromGroup   ${error ? "has-error" : ""}  ${
         horizontal ? "flex" : ""
       }  ${validate ? "is-valid" : ""} `}
     >
       {label && (
         <label
           htmlFor={id}
-          className={`block capitalize ${classLabel}  ${
-            horizontal ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words" : ""
+          className={`block capitalize text-white ${classLabel}  ${
+            horizontal ? "flex-0 mr-6 md:w-[100px] w-[60px] break-words " : ""
           }`}
         >
           {label}
         </label>
       )}
-      <div className={`relative ${horizontal ? "flex-1" : ""}`}>
+      <div className={`relative py-2 ${horizontal ? "flex-1" : ""}`}>
         {name && !isMask && (
           <input
             type={type === "password" && open === true ? "text" : type}
@@ -141,9 +141,9 @@ const TextInput = ({
       {/* error and success message*/}
       {error && (
         <div
-          className={` mt-2 ${
+          className={` mt-1 ${
             msgTooltip
-              ? " inline-block bg-red-500 text-white text-[10px] px-2 py-1 rounded"
+              ? " inline-block bg-red-500 text-white text-[10px] px-2  rounded"
               : " text-red-500 block text-sm"
           }`}
         >
@@ -153,9 +153,9 @@ const TextInput = ({
       {/* validated and success message*/}
       {validate && (
         <div
-          className={` mt-2 ${
+          className={` mt-1 ${
             msgTooltip
-              ? " inline-block bg-success-500 text-white text-[10px] px-2 py-1 rounded"
+              ? " inline-block bg-success-500 text-white text-[10px] px-2 rounded"
               : " text-success-500 block text-sm"
           }`}
         >
