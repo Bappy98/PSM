@@ -1,31 +1,40 @@
-// Sidebar.js
-import { Menu as MenuIcon ,Home as HomeIcon} from "@mui/icons-material";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
+  Collapse,
   Drawer,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import  { useState } from "react";
+import { sidebarItems as items } from "./sideItems";
+import { ExpandLess, ExpandMore, Menu as MenuIcon } from "@mui/icons-material";
 
 const Sidebar = ({ onCollapseChange }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [openDropdowns, setOpenDropdowns] = useState({});
 
   const toggleCollapse = () => {
-    setCollapsed(!collapsed);
-    onCollapseChange(!collapsed); // Notify the parent component about collapse change
+    const newState = !collapsed;
+    setCollapsed(newState);
+    onCollapseChange && onCollapseChange(newState);
   };
 
-  // Determine the selected component based on the current URL path
+  const handleClick = (index) => {
+    setOpenDropdowns((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
+  };
 
   return (
     <Drawer
       sx={{
-        width: collapsed ? 64 : 240, // Adjust width when collapsed
+        width: collapsed ? 64 : 240,
         flexShrink: 0,
         "& .MuiDrawer-paper": {
-          width: collapsed ? 64 : 240, // Adjust width when collapsed
+          width: collapsed ? 64 : 240,
           boxSizing: "border-box",
           marginTop: "4px",
         },
@@ -38,7 +47,7 @@ const Sidebar = ({ onCollapseChange }) => {
           <ListItemIcon>
             <MenuIcon />
           </ListItemIcon>
-          {/* Show/hide text based on collapse state */}
+
           {!collapsed && (
             <ListItemText
               className="bg-green-900 text-white text-center rounded py-1  font-extrabold uppercase bg-"
@@ -46,16 +55,43 @@ const Sidebar = ({ onCollapseChange }) => {
             />
           )}
         </ListItem>
-        <ListItem button>
-     
-     <ListItemIcon>
-             <HomeIcon />
-           </ListItemIcon>
-           <ListItemText primary="Market Home" />
-    
-    
-         
-         </ListItem>
+
+        {items.map((item, index) => (
+          <React.Fragment key={index}>
+            {item.dropdown ? (
+              <React.Fragment>
+                <ListItem button onClick={() => handleClick(index)}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.label} />
+                  {openDropdowns[index] ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse
+                  in={openDropdowns[index]}
+                  timeout="auto"
+                  unmountOnExit
+                >
+                  <List component="div" disablePadding>
+                    {item.dropdownItems.map((dropdownItem, subIndex) => (
+                      <Link to={dropdownItem.linkTo} key={subIndex}>
+                        <ListItem button className="left-3">
+                          <ListItemText primary={dropdownItem.dropIcon} />
+                          <ListItemText primary={dropdownItem.label} />
+                        </ListItem>
+                      </Link>
+                    ))}
+                  </List>
+                </Collapse>
+              </React.Fragment>
+            ) : (
+              <Link to={item.linkto} key={index}>
+                <ListItem button>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.label} />
+                </ListItem>
+              </Link>
+            )}
+          </React.Fragment>
+        ))}
       </List>
     </Drawer>
   );

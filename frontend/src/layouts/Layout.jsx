@@ -16,7 +16,7 @@ const Layout = () => {
     <div>
       <Topbar sidebarCollapsed={sidebarCollapsed} />
       <Box sx={{ display: "flex" }}>
-        <Sidebar onCollapseChange={handleSidebarCollapseChange} />
+        <Sidebar onCollapseChange={handleSidebarCollapseChange} />;
         <Box
           className="content"
           sx={{
