@@ -22,6 +22,10 @@
     {
       "name": "Users",
       "description": "Users related api"
+    },
+    {
+      "name":"Medicine",
+      "description":"Medicine related api"
     }
   ],
   "securityDefinitions": {
@@ -560,6 +564,437 @@
           }
         }
       }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary":"get all User",
+        "description":"Retrieves a list of all User",
+        "produces": ["application/json"],
+        "security":[
+          {
+            "Bearer":[]
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":" A list of Users"
+          }
+        }
+      }
+    },
+    "/user/{id}":{
+      "get":{
+        "tags":["Users"],
+        "summary":"Get user by ID",
+        "description": "Retrieves a single user by ID.",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the user to retrieve",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update user by ID",
+        "description": "Updates a single user's information.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the user to update",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "description": "User object with updated fields",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated successfully."
+          },
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Delete user by ID",
+        "description": "Deletes a single user.",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the user to delete",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted successfully."
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/medicine/Create": {
+      "post": {
+        "tags": ["Medicine"],
+        "summary": "create a new medicine info by super admin",
+        "description": "create a new medicine all info by super admin",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Medicine",
+            "description": "create a new medicine info with the provide information",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Medicine"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Medicine create successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/medicine": {
+      "get": {
+        "tags": ["Medicine"],
+        "summary": "get all medicine",
+        "description": "Retrieves a list of all medicine",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all medicine"
+          }
+        }
+      }
+    },
+    "/medicine/{id}": {
+      "get": {
+        "tags": ["Medicine"],
+        "summary": "Get medicine by id",
+        "description": "retrieves a single medicine by id",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the medicine to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single medicine"
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "404": {
+            "description": "medicine not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Medicine"],
+        "summary": "Update medicine by ID",
+        "description": "Update single medicine information",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the medicine to update"
+          },
+          {
+            "in": "body",
+            "name": "medicine",
+            "required": true,
+            "type": "object",
+            "description": "medicine object with update fields",
+            "schema": {
+              "$ref": "#definitions/Medicine"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "medicine update successfully"
+          },
+          "400": {
+            "description": "Invalid medicine supplied"
+          },
+          "404": {
+            "description": "medicine not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Medicine"],
+        "summary": "delete medicine by ID",
+        "description": "delete a single medicine",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the medicine to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "medicine delete successful"
+          },
+          "404": {
+            "description": "medicine not found"
+          }
+        }
+      }
+    },
+    "/dosages/Create": {
+      "post": {
+        "tags": ["Dosages"],
+        "summary": "create a new dosages info by super admin",
+        "description": "create a new dosages all info by super admin",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Dosages",
+            "description": "create a new dosages info with the provide information",
+            "required": true,
+            "schema": {
+              "$ref": "#definitions/Dosages"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Dosages create successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/dosages": {
+      "get": {
+        "tags": ["Dosages"],
+        "summary": "get all dosages",
+        "description": "Retrieves a list of all dosages",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all dosages"
+          }
+        }
+      }
+    },
+    "/dosages/{id}": {
+      "get": {
+        "tags": ["Dosages"],
+        "summary": "Get dosages by id",
+        "description": "retrieves a single dosages by id",
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the dosages to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single dosages"
+          },
+          "401": {
+            "description": "UnAuthorized"
+          },
+          "404": {
+            "description": "dosages not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Dosages"],
+        "summary": "Update dosages by ID",
+        "description": "Update single dosages information",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the dosages to update"
+          },
+          {
+            "in": "body",
+            "name": "dosages",
+            "required": true,
+            "type": "object",
+            "description": "dosages object with update fields",
+            "schema": {
+              "$ref": "#definitions/Dosages"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "dosages update successfully"
+          },
+          "400": {
+            "description": "Invalid dosages supplied"
+          },
+          "404": {
+            "description": "dosages not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Dosages"],
+        "summary": "delete dosages by ID",
+        "description": "delete a single dosages",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "description": "ID of the dosages to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "dosages delete successful"
+          },
+          "404": {
+            "description": "dosages not found"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -675,6 +1110,57 @@
           "type": "string"
         }
       }
+    },
+    "User":{
+      "type": "object",
+      "required": [ "fName", "lName","password"],
+      "properties": {
+        "fName": {
+          "type": "string"
+        },
+        "lName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Medicine":{
+      "type":"object",
+      "required":[],
+      "properties":{
+        "name":{
+          "type":"string"
+        },
+        "weight":{
+          "type":"string"
+        },
+        "unitPrice":{
+          "type":"number"
+        },
+        "generics":{
+          "type":"string"
+        },
+        "company":{
+          "type":"string"
+        },
+        "dosages":{
+          "type":"string"
+        }
+      }
+    },
+    "Dosages":{
+      "type": "object",
+      "required": ["name", "icon"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        }
+      } 
     }
   }
 }

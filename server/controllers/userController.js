@@ -42,7 +42,44 @@ const branchRegistration = asyncHandler(async (req, res) => {
   }
 });
 
+const userById = asyncHandler(async(req,res)=>{
+ 
+    const user =await User.findById(req.params.id)
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  
+})
+
+const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const allUsers = await User.find({ userType: { $ne: "" } });
+    res.json({
+      message: "successfully registration",
+      data: allUsers,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Delete single user
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.remove();
+    res.json({ message: "User deleted successfully" });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+
 module.exports = {
   login,
   branchRegistration,
+  getAllUsers,
+  userById,
+  deleteUser
 };
