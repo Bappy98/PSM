@@ -6,13 +6,14 @@ const {
   deleteGenerics,
   createGenerics,
 } = require("../controllers/genericsControllers");
+const { isSuperAdmin, protect } = require("../middleware/auth");
 const router = express.Router();
 
-router.route("/generics/create").post(createGenerics);
+router.route("/generics/create").post(protect,isSuperAdmin,createGenerics);
 router.route("/generics").get(getAllGenerics);
 router
   .route("/generics/:id")
-  .put(updateGenerics)
+  .put(protect,isSuperAdmin,updateGenerics)
   .get(findById)
-  .delete(deleteGenerics);
+  .delete(protect,isSuperAdmin,deleteGenerics);
 module.exports = router;

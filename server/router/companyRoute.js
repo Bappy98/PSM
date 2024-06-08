@@ -6,13 +6,14 @@ const {
   deleteCompany,
   createCompany,
 } = require("../controllers/companyControllers");
+const { protect, isSuperAdmin } = require("../middleware/auth");
 const router = express.Router();
 
-router.route("/company/create").post(createCompany);
+router.route("/company/create").post(protect,isSuperAdmin,createCompany);
 router.route("/company").get(getAllCompany);
 router
   .route("/company/:id")
-  .put(updateCompany)
+  .put(protect,isSuperAdmin,updateCompany)
   .get(findById)
-  .delete(deleteCompany);
+  .delete(protect,isSuperAdmin,deleteCompany);
 module.exports = router;

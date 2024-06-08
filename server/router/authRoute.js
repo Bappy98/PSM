@@ -6,12 +6,13 @@ const {
   userById,
   deleteUser,
 } = require("../controllers/userController");
+const { protect, isSuperAdmin } = require("../middleware/auth");
 const router = express.Router();
 
 router.route("/login").post(login);
-router.route("/branch/register").post(branchRegistration);
+router.route("/branch/register").post(protect,isSuperAdmin,branchRegistration);
 
-router.route("/users").get(getAllUsers);
-router.route("/user/:id").get(userById).delete(deleteUser);
+router.route("/users").get(protect,isSuperAdmin,getAllUsers);
+router.route("/user/:id").get(userById).delete(protect,isSuperAdmin,deleteUser);
 
 module.exports = router;

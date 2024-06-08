@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { useLoginMutation } from "../../store/api/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/api/auth/authSlice";
+import { getUser } from "@/store/api/user/userSlice";
 
 const schema = yup
   .object({
@@ -30,13 +31,14 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const userData = await login(data).unwrap();
-      console.log(userData);
+      //console.log(userData);
       dispatch(
         setUser({
-          token: userData?.token,
+          accessToken: userData?.token,
           user_id: userData?._id,
         })
       );
+      dispatch(getUser({ user_id: userData?._id }));
       localStorage.setItem(
         "auth",
         JSON.stringify({
@@ -62,7 +64,7 @@ const Login = () => {
                   name="email"
                   label="email"
                   type="text"
-                  
+                  defaultValue={"superadmin@gmail.com"}
                   className="w-full px-6 rounded"
                   placeholder="Enter your email"
                   register={register}
@@ -75,7 +77,7 @@ const Login = () => {
                   label="password"
                   type="password"
                   className="w-full px-6 rounded"
-                  defaultValue=""
+                  defaultValue="test123"
                   placeholder="Enter your password"
                   register={register}
                   error={errors.password}

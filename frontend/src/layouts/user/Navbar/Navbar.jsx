@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar/Sidbar";
 import { navLinks } from "./navlink";
+import logo from "./../../../assets/BRKK.svg";
 
 const Navbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -26,14 +27,10 @@ const Navbar = () => {
   return (
     <header className="top-0 fixed w-full z-99">
       <div className="px-4 lg:px-16 py-6 bg-gray-800 rounded ">
-        <nav className="flex justify-between">
+        <nav className="flex justify-between items-center">
           <div className="text-white text-2xl">
             <Link to="/">
-              <span>
-                <i className="fa-solid fa-outdent mr-3"></i>
-              </span>
-              <span className="text-red-700">CBST </span>
-              <span className="text-green-500">PHARMACY</span>
+              <img src={logo} className="h-16 w-16 z-30" alt="logo" />
             </Link>
           </div>
           <div className="">
@@ -82,7 +79,7 @@ const Navbar = () => {
               <Link to="/login">
                 <li className="flex">
                   <button className="py-1 hover:scale-105 text-white font-semibold  px-4 border border-gray-400 rounded shadow">
-                     Login
+                    Login
                   </button>
                 </li>
               </Link>
