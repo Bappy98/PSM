@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { useLoginMutation } from "../../store/api/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/api/auth/authSlice";
-import { getUser } from "@/store/api/user/userSlice";
+import { getUser } from "./../../store/api/user/userSlice";
 
 const schema = yup
   .object({
