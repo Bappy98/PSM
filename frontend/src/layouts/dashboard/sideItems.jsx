@@ -24,8 +24,8 @@ export const sidebarItems = [
       label: "Branch",
       dropdown: true,
       dropdownItems: [
-        { label: "Create" },
-        { label: "Edit" },
+        { label: "Create",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch-create"   },
+        { label: "Branch List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch"   },
       
       ],
     },
