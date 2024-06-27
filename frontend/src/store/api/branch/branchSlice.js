@@ -1,30 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
+import fetchWrapper from '@/util/fetchWrapper';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const storeUser = JSON.parse(localStorage.getItem("auth"));
+const initialState = {
+	loading: false,
+	error: null,
+	success: false,
+	blog: {},
+};
 
-export const authSlice = createSlice({
-  name: "auth",
-  initialState: {
-    accessToken: storeUser?.accessToken ? storeUser.accessToken : null,
-    isLoggedIn: storeUser?.accessToken ? true : false,
-    user_id: storeUser?.user_id ? storeUser?.user_id : null,
-  },
-  reducers: {
-    setUser: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.isLoggedIn = true;
-      state.user_id = action.payload.user_id;
-    },
-    logOut: (state, action) => {
-      state.accessToken = null;
-      state.isLoggedIn = false;
-      state.user_id = null;
-    },
-  },
+export const getBlog = createAsyncThunk(
+	'blog/getBlog',
+	async ({ id }) => {
+		try {
+			const response = await fetchWrapper(`blogs/${id}`);
+			console.log(response.data)
+			return response.data;
+		} catch (error) {
+			throw error.response ? error.response.data : error.message;
+		}
+	}
+);
+
+const blogSlice = createSlice({
+	name: 'blog',
+	initialState,
+	reducers: {},
+	extraReducers: builder => {
+		builder
+			.addCase(getBlog.pending, state => {
+				state.loading = true;
+			})
+			.addCase(getBlog.fulfilled, (state, action) => {
+				state.loading = false;
+				state.success = true;
+				state.blog = action.payload;
+			})
+			.addCase(getBlog.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message || 'Failed to fetch blog data';
+			});
+	},
 });
 
-export const { setUser, logOut } = authSlice.actions;
-export default authSlice.reducer;
+export default blogSlice.reducer;
 
-export const selectCurrentUser = (state) => state.auth.user_id;
-export const selectCurrentToken = (state) => state.auth.accessToken;

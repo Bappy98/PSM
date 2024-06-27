@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useBranchListMutation } from '../../store/api/branch/branchApi';
+import { useBranchListQuery } from '../../store/api/branch/branchApi';
 
 const BranchList = () => {
   const [branches, setBranches] = useState([]);
-  const { data: branchData, error, isLoading } = useBranchListMutation(); // Assuming this hook fetches branch data
+  const { data: branchData, error, isLoading } = useBranchListQuery(); // Assuming this hook fetches branch data
+  console.log(branchData);
 
   useEffect(() => {
     if (branchData) {
-      setBranches(branchData); // Assuming branchData is an array of branch objects
+      setBranches(branchData.data); // Assuming branchData is an array of branch objects
     }
     // You can add error handling logic here if needed
   }, [branchData, error]);

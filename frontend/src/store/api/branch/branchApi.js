@@ -9,11 +9,10 @@ export const branchApi = apiSlice.injectEndpoints({
           body: data,
         }),
       }),
-      branchList: builder.mutation({
-        query: (data) => ({
-          url: "/branch",
+      branchList: builder.query({
+        query: () => ({
+          url: "/company",
           method: "GET",
-          body: data,
         }),
       }),
       
@@ -22,4 +21,4 @@ export const branchApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useBranchCreateMutation,useBranchListMutation  } = branchApi;
+export const { useBranchCreateMutation,useBranchListQuery  } = branchApi;

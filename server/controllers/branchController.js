@@ -4,7 +4,7 @@ const Branch = require("../models/branchModle");
 const createBranch = asyncHandler(async (req, res) => {
   const { name, address, phone, logo } = req.body;
   try {
-    const user = await User.findOne({ fName: name });
+    const user = await User.findOne({ name: name });
     if (!user) {
       res.status(404).json({
         message: "user not found",
@@ -18,7 +18,7 @@ const createBranch = asyncHandler(async (req, res) => {
       });
     }
     const newBranch = new Branch({
-      user_id: user._id,
+      user_id: user.id,
       address,
       phone,
       logo,

@@ -18,7 +18,7 @@ const login = asyncHandler(async (req, res) => {
 });
 
 const branchRegistration = asyncHandler(async (req, res) => {
-  const { email, fName, lName, password, userType } = req.body;
+  const { email, name, password, userType } = req.body;
   const userExists = await User.findOne({ email });
 
   if (userExists) {
@@ -26,8 +26,7 @@ const branchRegistration = asyncHandler(async (req, res) => {
   }
   const user = new User({
     email,
-    fName,
-    lName,
+    name,
     userType,
     password,
   });
