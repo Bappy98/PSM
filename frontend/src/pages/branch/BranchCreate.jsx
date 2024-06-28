@@ -99,6 +99,7 @@ const BranchCreate = () => {
         {isError && <p className="mt-2 text-sm text-red-600">{error.message}</p>}
       </form>
     </div>
+    
   );
 };  
 

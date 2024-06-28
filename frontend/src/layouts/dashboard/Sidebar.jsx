@@ -19,6 +19,11 @@ const Sidebar = ({ onCollapseChange }) => {
     const newState = !collapsed;
     setCollapsed(newState);
     onCollapseChange && onCollapseChange(newState);
+
+    // When collapsing, close all dropdowns
+    if (newState) {
+      setOpenDropdowns({});
+    }
   };
 
   const handleClick = (index) => {
@@ -50,7 +55,7 @@ const Sidebar = ({ onCollapseChange }) => {
 
           {!collapsed && (
             <ListItemText
-              className="bg-green-900 text-white text-center rounded py-1  font-extrabold uppercase bg-"
+              className="bg-green-900 text-white text-center rounded py-1  font-extrabold uppercase"
               primary="PSM"
             />
           )}
@@ -66,7 +71,7 @@ const Sidebar = ({ onCollapseChange }) => {
                   {openDropdowns[index] ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse
-                  in={openDropdowns[index]}
+                  in={!collapsed && openDropdowns[index]}
                   timeout="auto"
                   unmountOnExit
                 >
@@ -74,7 +79,7 @@ const Sidebar = ({ onCollapseChange }) => {
                     {item.dropdownItems.map((dropdownItem, subIndex) => (
                       <Link to={dropdownItem.linkTo} key={subIndex}>
                         <ListItem button className="left-3">
-                          <ListItemText primary={dropdownItem.dropIcon} />
+                          <ListItemIcon>{dropdownItem.dropIcon}</ListItemIcon>
                           <ListItemText primary={dropdownItem.label} />
                         </ListItem>
                       </Link>
