@@ -12,7 +12,7 @@ const schema = yup
       phone: yup.string().required().label("Address"),
       
   }).required();
-function BranchForm() {
+function CreateCompany() {
   const {
     register,
     formState: { errors },
@@ -24,16 +24,14 @@ function BranchForm() {
   return (
     <div>
       <form>
-        <div className="">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center">
             <input type="file"/>
-          <Select
+          <TextInput
           label="Name"
           defaultValue=""
-          options={['faysal']}
-          name="userType"
           register={register}
           error={errors.name}
-          placeholder="Select Branch name" 
+          placeholder="Company name" 
           />
           <TextInput
             label={"Address :"}
@@ -60,4 +58,4 @@ function BranchForm() {
   );
 }
 
-export default BranchForm;
+export default CreateCompany;

@@ -35,7 +35,7 @@ export const sidebarItems = [
       label: "Generics",
       dropdown: true,
       dropdownItems: [
-        { label: "Create Generics",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch-create"   },
+        { label: "Create Generics",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/generics-create"   },
         { label: "Generics List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch"   },
       
       ],
