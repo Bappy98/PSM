@@ -59,7 +59,7 @@ const TextInput = ({
             {...rest}
             className={`${
               error ? " has-error" : " "
-            } form-control py-2 ${className}  `}
+            } form-control py-2    ${className}  `}
             placeholder={placeholder}
             readOnly={readonly}
             defaultValue={defaultValue}

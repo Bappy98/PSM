@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import fetchWrapper from "./../../../../util/fetchWrapper";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import fetchWrapper from './../../../../util/fetchWrapper';
 
 const initialState = {
   loading: false,
@@ -8,17 +8,17 @@ const initialState = {
   user: {},
 };
 
-export const getUser = createAsyncThunk("user/getUser", async ({ user_id }) => {
+export const getUser = createAsyncThunk('user/getUser', async ({ user_id }, { rejectWithValue }) => {
   try {
-    const response = await fetchWrapper(`user/${user_id}`);
+    const response = await fetchWrapper.get(`user/${user_id}`);
     return response.data;
   } catch (error) {
-    throw error.response ? error.response.data : error.message;
+    return rejectWithValue(error.response ? error.response.data : error.message);
   }
 });
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -33,7 +33,7 @@ const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch user data";
+        state.error = action.payload || 'Failed to fetch user data';
       });
   },
 });
