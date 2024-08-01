@@ -7,23 +7,38 @@ const medicineSchema = new mongoose.Schema({
     },
     weight:{
         type:String,
-        required:true
+        //required:true
     },
+    singleBoxPrice:{
+        type:Number
+    }
+    ,
     unitPrice:{
         type:Number,
         required:true
     },
     dosages:{
-        type:Schema.Types.ObjectId,
-        ref:'Dosages'
+        type:String,
+       // required:true
     },
     generics:{
-        type:Schema.Types.ObjectId,
-        ref:'Generics' 
+        type:String,
+        //required:true 
     },
     company:{
         type:Schema.Types.ObjectId,
         ref:'Company' 
+    },
+    description:{
+        type:String
+    },
+    type:{
+        type:String,
+        required:true
+    },
+    image:{
+        type:String,
+        required:true
     }
 })
 

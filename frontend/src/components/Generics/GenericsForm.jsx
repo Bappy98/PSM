@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
 import TextInput from "../ui/TextInput";
+import Textarea from '../ui/Textarea'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Title from "../title/Title";
+import Button from "../Button/Button";
+import fetchWrapper from "../../../util/fetchWrapper";
 
 const schema = yup
   .object({
@@ -15,39 +19,56 @@ function GenericsForm() {
         register,
         formState: { errors },
         handleSubmit,
+        reset
       } = useForm({
         mode: "all",
         resolver: yupResolver(schema),
       });
+
+      const onSubmit = async (data) =>{
+        console.log(data);
+        try {
+          const res =  await fetchWrapper.post('/generics/Create',data)
+          reset()
+        
+         }
+        
+        catch (error) {
+          
+        }
+      }
   return (
-    <div>
-        <form>
-        <div className="">
+    <div className="max-w-[900px] bg-blue-200">
+      <Title>Generics Create</Title>
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mx-5">
             
 
           <TextInput
             label={"Name :"}
             register={register}
             placeholder="name"
-            className=""
+            className="max-w-96 w-full"
             type={"text"}
             name="name"
             error={errors.name}
           />
        
-          <TextInput
+          <Textarea
             label={"Details :"}
             register={register}
             placeholder="details"
-            className=""
+            className="max-w-96 w-full"
             type={"text"}
+            row={'9'}
+
             name="details"
             error={errors.details}
           />
        
          
         </div>
-        <button type="submit">Create Company</button>
+        <Button className={'justify-start'}>create Generics</Button>
       </form>
     </div>
   )

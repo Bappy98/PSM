@@ -1,94 +1,81 @@
-import { useForm } from "react-hook-form";
-import TextInput from "../ui/TextInput";
+//import React from 'react'
 import * as yup from "yup";
+import Title from "../title/Title";
+import FileInput from "../ui/FileInput";
+import TextInput from "../ui/TextInput";
+import Button from "../Button/Button";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Select from "../ui/Select";
-//import { useBranchRegisterMutation } from "../../store/api/auth/authApiSlice";
-//import fetchWrapper from "./../../../util/fetchWrapper";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { Button, Grid, Typography, Paper,Box } from "@mui/material";
+import { useState } from "react";
 
 const schema = yup
-  .object({
-      name: yup.string().required().label("Name"),
-      address: yup.string().required().label("Address"),
-      phone: yup.string().required().label("Address"),
-      
-  }).required();
+  .object()
+  .shape({
+    name: yup.string().required().label("Name"),
+    address: yup.string().required().label("Address"),
+    phone: yup.string().required().label("Phone"),
+    image: yup.mixed().required("A Image is required"),
+  })
+  .required();
 function CreateCompany() {
+  const [base64Logo, setBase64Logo] = useState(null);
   const {
     register,
     formState: { errors },
     handleSubmit,
+    control
   } = useForm({
     mode: "all",
     resolver: yupResolver(schema),
   });
   return (
-    <Paper elevation={3} style={{ padding: 20 }}>
-      <Typography variant="h5" className="my-3 text-center" gutterBottom>
-        Create Company
-      </Typography>
-
-      <form className="mt-9">
-        <div className="grid grid-cols-1 md:grid-cols-2 ">
-          <div className="">
-          <label className="my-5 font-semibold" htmlFor="">Logo</label>
-       < Box item xs={12} className="mt-2">
-            <label htmlFor="file-upload">
-              <input
-                id="file-upload"
-                type="file"
-                style={{ display: "none" }}
-                
-              />
-              <Button
-                variant="outlined"
-                component="span"
-                startIcon={<CloudUploadIcon />}
-              >
-                Upload 
-              </Button>
-            </label>
-            
-            
-          </Box>
-          </div>
-
+    <div className="max-w-[900px] bg-blue-300 p-5">
+      <Title>Create Company</Title>
+      <form>
+        <div className="mb-5">
+          <FileInput
+            label="Logo"
+            name="logo"
+            register={register}
+            control={control}
+            error={errors.logo}
+            setBase64Logo={setBase64Logo}
+            base64Logo={base64Logo}
+            id="logo"
+            required={true}
+          />
+        </div>
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
           <TextInput
-          label="Name"
-          defaultValue=""
-          register={register}
-          error={errors.name}
-          placeholder="Company name" 
+            label="Name"
+            register={register}
+            error={errors.name}
+            className="max-w-96 w-full px-2"
+            type="text"
+            placeholder="Company name"
           />
           <TextInput
             label={"Address :"}
             register={register}
             placeholder="address"
-            className=""
             type={"text"}
             name="address"
+            className="max-w-96 w-full"
             error={errors.address}
           />
           <TextInput
             label={"Phone"}
             register={register}
             type={"phone"}
-            placeholder="Phone Number" className=""
+            placeholder="Phone Number"
+            className="max-w-96 w-full"
             name="phone"
             error={errors.phone}
           />
-         
         </div>
-
+        <Button>Create</Button>
       </form>
-
-      <Box className="flex justify-center py-6">
-      <Button variant="contained" type="submit">Create Company</Button>
-
-      </Box>
-    </Paper>
+    </div>
   );
 }
 

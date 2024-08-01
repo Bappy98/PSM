@@ -4,6 +4,7 @@ import Layout from "./../layouts/dashboard/Layout";
 import Homepage from "./../pages/home/Homepage";
 import UserLayout from "./../layouts/user/UserLayout";
 import PrivateRoute from "./../authGard/PrivateRoute";
+//import BranchRouter from './../authGard/BranchRoute'
 import PublicRoute from "./../authGard/PublicRoute";
 import Dashboard from "./../pages/admin/dashboard/Dashboard";
 import BranchRegister from './../pages/branchRegister'
@@ -11,6 +12,8 @@ import BranchCreate from "../pages/CreateBranch";
 import CompanyCreate from "../pages/company";
 import CreateGeneric from "../pages/generices";
 import CreateDosages from "../pages/dosages";
+import MedicineCreate from "../pages/medicine";
+import BranchList from "../pages/branch/BranchList";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +32,20 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
     ],
-  },
+   },
+  // {
+  //   element:(
+  //     <BranchRouter>
+  //     <Layout/>
+  //     </BranchRouter>
+  //   ),
+  //   children:[
+  //     {
+  //       path: "/dashboard",
+  //       element: <Dashboard />,
+  //     },
+  //   ]
+  // },
   {
     element: (
       <PrivateRoute>
@@ -61,6 +77,15 @@ export const router = createBrowserRouter([
         path:'/dosages-create',
         element:<CreateDosages/>
       },
+      {
+        path:'/medicine-create',
+        element:<MedicineCreate/>
+      },
+      {
+        path:'/branches',
+        element:<BranchList/>
+      }
     ],
   },
+  
 ]);

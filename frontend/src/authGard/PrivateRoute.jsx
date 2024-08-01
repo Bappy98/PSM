@@ -1,11 +1,12 @@
-import { selectCurrentToken } from "./../store/api/auth/authSlice";
-import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import { useMemo } from "react";
+
+import { useSelector } from "react-redux";
+import { selectCurrentToken } from "../store/api/auth/authSlice";
 
 function PrivateRoute({ children }) {
-  const token = useSelector(selectCurrentToken);
+  const token = useSelector(selectCurrentToken)
 
-  const location = useLocation();
   return token ? (
     children
   ) : (

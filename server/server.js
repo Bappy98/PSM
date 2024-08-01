@@ -23,6 +23,9 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(router);
 app.use("/api/v1", router);
+app.use(express.json({ limit: '10mb' })); // Adjust the size limit as needed
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
 
 app.get("/", function (req, res) {
   res.send("Backend is running successfully");

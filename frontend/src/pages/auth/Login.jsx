@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useLoginMutation } from "../../store/api/auth/authApiSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/api/auth/authSlice";
 import { getUser } from "./../../store/api/user/userSlice";
 
@@ -28,17 +28,20 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [login, { isLoading, data, error }] = useLoginMutation();
+  const {user} = useSelector((state)=>state.user)
+  console.log("logIn page",user);
   const onSubmit = async (data) => {
     try {
       const userData = await login(data).unwrap();
-      //console.log(userData);
+      console.log(userData);
       dispatch(
         setUser({
           accessToken: userData?.token,
           user_id: userData?._id,
+          //userType:userData?.userType
         })
       );
-      dispatch(getUser({ user_id: userData?._id }));
+      dispatch(getUser({ user_id: userData._id }));
       localStorage.setItem(
         "auth",
         JSON.stringify({
@@ -46,7 +49,11 @@ const Login = () => {
           user_id: userData?._id,
         })
       );
-      navigate("/dashboard");
+      if(user.userType==="superadmin") {
+        navigate("/dashboard");
+      } else {
+        navigate("/company-create")
+      }
     } catch (error) {}
   };
 
@@ -90,7 +97,7 @@ const Login = () => {
             <button
               type="submit"
               className="w-full bg-blue-900 text-white rounded-md mt-4 hover:text-blue-900 py-2 hover:bg-blue-50 transition duration-300"
-              isLoading={isLoading}
+              //isLoading={isLoading}
             >
               Login
             </button>

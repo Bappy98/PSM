@@ -3,58 +3,115 @@ import TextInput from "../ui/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "../ui/Select";
-//import { useBranchRegisterMutation } from "../../store/api/auth/authApiSlice";
-//import fetchWrapper from "./../../../util/fetchWrapper";
+import FileInput from "../ui/FileInput";
+import { useEffect, useState } from "react";
+import Title from "../title/Title";
+import Button from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../store/api/users/usersSlice";
+import fetchWrapper from "../../../util/fetchWrapper";
+
 const schema = yup
   .object({
-      name: yup.string().required().label("Name"),
-      address: yup.string().required().label("Address"),
-      phone: yup.string().required().label("Address"),
-      
-  }).required();
+    name: yup.string().required().label("Name"),
+    address: yup.string().required().label("Address"),
+    phone: yup.string().required().label("Phone"),
+    logo: yup.mixed().required("Logo is required"),
+  })
+  .required();
+
 function BranchForm() {
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.users);
+  const [base64Logo, setBase64Logo] = useState(null);
+  const [name, setName] = useState([]);
+
+  useEffect(() => {
+    dispatch(getUsers());
+
+  }, [dispatch]);
+  //console.log(users.data);
+    useEffect(()=>{
+      if(users?.data) {
+        setName(users?.data.map((user) => user.name));
+      }
+    },[users])
+  
+
+  //console.log(name);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
+    control,
+    reset,
   } = useForm({
     mode: "all",
     resolver: yupResolver(schema),
   });
+
+  const onSubmit = async (data) => {
+    const formData = {
+      ...data,
+      logo: base64Logo,
+    };
+    console.log(formData);
+    try {
+      const res = await fetchWrapper.post("/branch/create", formData);
+      reset();
+      setBase64Logo(null)
+    } catch (error) {}
+  };
+
   return (
-    <div>
-      <form>
-        <div className="">
-            <input type="file"/>
+    <div className="max-w-[900px] bg-[#7acdee] p-5">
+      <Title>Branch Create</Title>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-5">
+          <FileInput
+            label="Logo"
+            name="logo"
+            register={register}
+            control={control}
+            error={errors.logo}
+            setBase64Logo={setBase64Logo}
+            base64Logo={base64Logo}
+            id="logo"
+            required={true}
+          />
+        </div>
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-5">
           <Select
-          label="Name"
-          defaultValue=""
-          options={['faysal']}
-          name="userType"
-          register={register}
-          error={errors.name}
-          placeholder="Select Branch name" 
+            label="Name"
+            defaultValue=""
+            options={name}
+            name="name"
+            register={register}
+            error={errors.name}
+            placeholder="Select Branch name"
+            className="max-w-96 w-full"
           />
           <TextInput
-            label={"Address :"}
+            label="Address"
             register={register}
-            placeholder="address"
-            className=""
-            type={"text"}
+            placeholder="Address"
+            className="max-w-96 w-full"
+            type="text"
             name="address"
             error={errors.address}
           />
           <TextInput
-            label={"Phone"}
+            label="Phone"
             register={register}
-            type={"phone"}
-            placeholder="Phone Number" className=""
+            type="text"
+            placeholder="Phone Number"
+            className="max-w-96 w-full"
             name="phone"
             error={errors.phone}
           />
-         
         </div>
-        <button type="submit">Create Company</button>
+        <Button>Branch Create</Button>
       </form>
     </div>
   );

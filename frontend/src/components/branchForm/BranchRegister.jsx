@@ -2,9 +2,11 @@ import { useForm } from "react-hook-form";
 import TextInput from "../ui/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-//import { useBranchRegisterMutation } from "../../store/api/auth/authApiSlice";
 import fetchWrapper from './../../../util/fetchWrapper'
 import useToast from "../../hooks/useToast";
+import Title from "../title/Title";
+import Button from "../Button/Button";
+
 
 const schema = yup
   .object({
@@ -23,15 +25,16 @@ function Register() {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm({
     mode: "all",
     resolver: yupResolver(schema),
   });
-//const [branch,{isLoading}] = useBranchRegisterMutation()
   const onSubmit = async (data) =>{
     console.log(data);
     try {
       const res =  await fetchWrapper.post('/branch/register',data)
+      reset()
       successToast("successful")
      }
     
@@ -41,15 +44,16 @@ function Register() {
   }
   
   return (
-    <div>
+    <div className="max-w-[900px] bg-blue-200">
+      <Title>Branch Register</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
-       <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center">
+       <div className="grid md:grid-cols-2 grid-cols-1 mx-5 gap-5">
        <TextInput
           label={"Name :"}
           register={register}
           type={"text"}
           name="name"
-          className=""
+          className="max-w-96 w-full"
           error={errors.name}
           placeholder="Enter Your Name"
         />
@@ -57,7 +61,7 @@ function Register() {
           label={"Email :"}
           register={register}
           placeholder="email"
-           className=""
+           className="max-w-96 w-full"
           type={"email"}
           name="email"
           error={errors.email}
@@ -67,7 +71,7 @@ function Register() {
           register={register}
           type={"password"}
           placeholder="password"
-           className=""
+           className="max-w-96 w-full"
           name="password"
           error={errors.password}
         />
@@ -75,7 +79,7 @@ function Register() {
           label={"Confirm Password :"}
           register={register}
           type={"password"}
-           className=""
+           className="max-w-96 w-full"
           placeholder="password"
           name="confirmPassword"
           error={errors.confirmPassword}
@@ -88,7 +92,7 @@ function Register() {
           defaultValue={"branch"}
         />
        </div>
-        <button type="submit">Add new Branch</button>
+        <Button >Register</Button>
       </form>
     </div>
   );

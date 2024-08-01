@@ -59,7 +59,7 @@ const TextInput = ({
             {...rest}
             className={`${
               error ? " has-error" : " "
-            } form-control py-2    ${className}  `}
+            } form-control py-2  px-3  ${className}  `}
             placeholder={placeholder}
             readOnly={readonly}
             defaultValue={defaultValue}
@@ -71,7 +71,7 @@ const TextInput = ({
         {!name && !isMask && (
           <input
             type={type === "password" && open === true ? "text" : type}
-            className={`form-control py-2 ${className}`}
+            className={`form-control py-2  ${className}`}
             placeholder={placeholder}
             readOnly={readonly}
             disabled={disabled}

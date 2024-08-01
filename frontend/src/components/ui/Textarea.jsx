@@ -1,15 +1,15 @@
+import React from "react";
 import Icon from "./Icon";
-import { Fragment } from "react";
-const Select = ({
+const Textarea = ({
   label,
-  placeholder = "Select Option",
+  placeholder,
   classLabel = "form-label",
   className = "",
   classGroup = "",
   register,
   name,
   readonly,
-  value,
+  dvalue,
   error,
   icon,
   disabled,
@@ -18,14 +18,11 @@ const Select = ({
   validate,
   msgTooltip,
   description,
+  cols,
+  row = 3,
   onChange,
-  options,
-  defaultValue,
-
-  size,
   ...rest
 }) => {
-  options = options || Array(3).fill("option");
   return (
     <div
       className={`fromGroup  ${error ? "has-error" : ""}  ${
@@ -44,77 +41,38 @@ const Select = ({
       )}
       <div className={`relative ${horizontal ? "flex-1" : ""}`}>
         {name && (
-          <select
-            onChange={onChange}
+          <textarea
             {...register(name)}
             {...rest}
             className={`${
               error ? " has-error" : " "
-            } form-control py-2 px-8 appearance-none ${className}  `}
+            } form-control py-2 px-3 ${className}  `}
             placeholder={placeholder}
             readOnly={readonly}
             disabled={disabled}
             id={id}
-            value={value}
-            size={size}
-            defaultValue={defaultValue}
-          >
-            <option value="">
-              {placeholder}
-            </option>
-            {options.map((option, i) => (
-              <Fragment key={i}>
-                {option.value && option.label ? (
-                  <option key={i} value={option.value}>
-                    {option.label}
-                  </option>
-                ) : (
-                  <option key={i} value={option}>
-                    {option}
-                  </option>
-                )}
-              </Fragment>
-            ))}
-          </select>
+            cols={cols}
+            rows={row}
+            onChange={onChange}
+          ></textarea>
         )}
         {!name && (
-          <select
-            onChange={onChange}
+          <textarea
             className={`${
               error ? " has-error" : " "
-            } form-control py-2 appearance-none  ${className}  `}
+            } form-control py-2 ${className}  `}
             placeholder={placeholder}
             readOnly={readonly}
             disabled={disabled}
             id={id}
-            value={value}
-            size={size}
-            defaultValue={defaultValue}
-          >
-            <option value="" disabled>
-              {placeholder}
-            </option>
-            {options.map((option, i) => (
-              <Fragment key={i}>
-                {option.value && option.label ? (
-                  <option key={i} value={option.value}>
-                    {option.label}
-                  </option>
-                ) : (
-                  <option key={i} value={option}>
-                    {option}
-                  </option>
-                )}
-              </Fragment>
-            ))}
-          </select>
+            cols={cols}
+            rows={row}
+            onChange={onChange}
+          ></textarea>
         )}
 
         {/* icon */}
-        <div className="flex text-xl absolute ltr:right-[14px] rtl:left-[14px] top-[60%] -translate-y-1/2  space-x-1 rtl:space-x-reverse ">
-          <span className=" relative -right-2 inline-block text-slate-900 dark:text-slate-300 pointer-events-none">
-            <Icon icon="heroicons:chevron-down" className={''} />
-          </span>
+        <div className="flex text-xl absolute ltr:right-[14px] rtl:left-[14px] top-1/2 -translate-y-1/2  space-x-1 rtl:space-x-reverse">
           {error && (
             <span className="text-danger-500">
               <Icon icon="heroicons-outline:information-circle" />
@@ -157,4 +115,4 @@ const Select = ({
   );
 };
 
-export default Select;
+export default Textarea;

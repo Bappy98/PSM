@@ -13,8 +13,8 @@ const Layout = () => {
   };
 
   return (
-    <div>
-      <Topbar sidebarCollapsed={sidebarCollapsed} />
+    <div className="">
+      <Topbar sidebarCollapsed={sidebarCollapsed} sx={{}} />
       <Box sx={{ display: "flex" }}>
         <Sidebar onCollapseChange={handleSidebarCollapseChange} />;
         <Box
@@ -24,6 +24,8 @@ const Layout = () => {
             marginTop: "90px",
             padding: "15px",
             transition: "margin-left 0.3s ease",
+            backgroundColor:"#c2d7f3",
+            minHeight:"88vh"
           }}
         >
           <Outlet />

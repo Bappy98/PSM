@@ -10,12 +10,12 @@ const { isSuperAdmin, protect } = require("../middleware/auth");
 //const { findById } = require("../models/branchModle");
 const router = express.Router();
 
-router.route("/branch/create").post(protect,isSuperAdmin,createBranch);
+router.route("/branch/create").post(protect, isSuperAdmin, createBranch);
 
-router.route("/branch").get(protect,isSuperAdmin,getAllBranch);
+router.route("/branch").get( getAllBranch);
 router
   .route("/branch/:id")
-  .put(protect,updateBranch)
+  .put(protect, updateBranch)
   .get(findById)
-  .delete(protect,isSuperAdmin,deleteBranch);
+  .delete(protect, isSuperAdmin, deleteBranch);
 module.exports = router;

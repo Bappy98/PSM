@@ -38,7 +38,10 @@ const createBranch = asyncHandler(async (req, res) => {
 
 const getAllBranch = asyncHandler(async (req, res) => {
   try {
-    const branch = await Branch.find({});
+    const branch = await Branch.find({}).populate({
+      path: 'user_id',
+      select: 'name email' // Specify the fields you want to populate
+    });
     res.status(200).json({
       message: "A list of all Branch",
       data: branch,
