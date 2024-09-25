@@ -10,7 +10,7 @@ const { findById } = require("../models/medicineModle");
 
 const router = express.Router();
 
-router.route("/medicine/create").post(protect, isSuperAdmin, cerateMedicine);
+router.route("/medicine/create").post(cerateMedicine);
 router.route("/medicines").get(getAllMedicine);
 router
   .route("/medicine/:id")

@@ -9,6 +9,12 @@ export const sidebarItems = [
       linkto:"/dashboard"
     },
     {
+      icon: <ImportContactsOutlined />,
+      label: "Stock",
+      dropdown:false,
+      linkto:"/stock-dashboard"
+    },
+    {
       icon: <HomeRepairServiceOutlined />,
       label: "Company",
       dropdown: true,
@@ -56,7 +62,7 @@ export const sidebarItems = [
       dropdown: true,
       dropdownItems: [
         { label: "Medicine Add",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/medicine-create"   },
-        { label: "Create",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch-create"   }
+        { label: "Medicine List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/medicine-list"   }
       
       ],
     },

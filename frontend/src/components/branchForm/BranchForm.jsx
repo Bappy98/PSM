@@ -1,15 +1,14 @@
 import { useForm } from "react-hook-form";
-import TextInput from "../ui/TextInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Select from "../ui/Select";
-import FileInput from "../ui/FileInput";
 import { useEffect, useState } from "react";
-import Title from "../title/Title";
-import Button from "../Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../store/api/users/usersSlice";
-import fetchWrapper from "../../../util/fetchWrapper";
+import { getUsers } from "@/store/api/users/usersSlice";
+import fetchWrapper from "@/util/fetchWrapper";
+import TextInput from "@/components/ui/TextInput";
+import FileInput from "@/components/ui/FileInput";
+import Title from "@/components/title/Title";
+import Select from "@/components/ui/Select";
 
 const schema = yup
   .object({
@@ -28,15 +27,13 @@ function BranchForm() {
 
   useEffect(() => {
     dispatch(getUsers());
-
   }, [dispatch]);
   //console.log(users.data);
-    useEffect(()=>{
-      if(users?.data) {
-        setName(users?.data.map((user) => user.name));
-      }
-    },[users])
-  
+  useEffect(() => {
+    if (users?.data) {
+      setName(users?.data.map((user) => user.name));
+    }
+  }, [users]);
 
   //console.log(name);
 
@@ -60,7 +57,7 @@ function BranchForm() {
     try {
       const res = await fetchWrapper.post("/branch/create", formData);
       reset();
-      setBase64Logo(null)
+      setBase64Logo(null);
     } catch (error) {}
   };
 

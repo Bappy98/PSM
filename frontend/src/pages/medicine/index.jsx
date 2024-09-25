@@ -1,5 +1,6 @@
+import MedicineForm from '@/components/medicine/MedicineForm'
 import React from 'react'
-import MedicineForm from '../../components/medicine/MedicineForm'
+
 
 function MedicineCreate() {
   return (

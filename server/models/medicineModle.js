@@ -3,7 +3,7 @@ const { default: mongoose, Schema } = require("mongoose");
 const medicineSchema = new mongoose.Schema({
     name:{
         type:String,
-        unique:true
+        //unique:true
     },
     weight:{
         type:String,

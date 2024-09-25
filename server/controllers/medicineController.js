@@ -3,8 +3,8 @@ const Medicine = require("./../models/medicineModle");
 const Dosages = require("../models/dosagesModel");
 const Company = require("../models/companyModel");
 const Generics = require("../models/genericsModel");
-const User = require("../models/userModel")
-const Stock = require("../models/stockModle")
+const User = require("../models/userModel");
+const Stock = require("../models/stockModle");
 const cerateMedicine = asyncHandler(async (req, res) => {
   const {
     name,
@@ -29,7 +29,7 @@ const cerateMedicine = asyncHandler(async (req, res) => {
         message: "Medicine already exists for this name",
       });
     }
-    if ( singleCompany) {
+    if (singleCompany) {
       const newMedicine = new Medicine({
         name,
         weight,
@@ -42,15 +42,15 @@ const cerateMedicine = asyncHandler(async (req, res) => {
         type,
         image,
       });
-     const data = await newMedicine.save();
+      const data = await newMedicine.save();
 
-     const users = await User.find({})
-     const stockEntries = users.map(user=>({
-      user:user._id,
-      medicine: newMedicine._id,
-      quantity:0
-     }))
-     await Stock.insertMany(stockEntries)
+      const users = await User.find({});
+      const stockEntries = users.map((user) => ({
+        user: user._id,
+        medicine: newMedicine._id,
+        quantity: 0,
+      }));
+      await Stock.insertMany(stockEntries);
 
       res.status(201).json({
         massage: "Medicine create successfully",
@@ -71,11 +71,10 @@ const cerateMedicine = asyncHandler(async (req, res) => {
 
 const getAllMedicine = asyncHandler(async (req, res) => {
   try {
-    const medicine = await Medicine.find({});
-    res.status(200).json({
-      message: "A list of all Medicine",
-      data: medicine,
-    });
+    const data = await Medicine.find({}).populate('company');
+    res.status(200).json(
+      data
+    );
   } catch (error) {
     res
       .status(500)
@@ -134,9 +133,9 @@ const updateMedicine = asyncHandler(async (req, res) => {
     const saveData = await medicine.save();
 
     await Stock.updateMany(
-      {medicine:req.params.id},
-      {$set:{medicine:medicine._id}}
-    )
+      { medicine: req.params.id },
+      { $set: { medicine: medicine._id } }
+    );
 
     res.status(200).json({
       message: "Medicine update successfully",

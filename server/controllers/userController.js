@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("./../models/userModel");
-const generateToken = require("./../utils/generateToken");
+const generateToken = require("../utils/generateToken");
+const jwt = require('jsonwebtoken')
 
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -10,7 +11,7 @@ const login = asyncHandler(async (req, res) => {
       message: "Login success",
       _id: user._id,
       email: user.email,
-      token: generateToken(user._id),
+      token: generateToken(user._id)
     });
   } else {
     res.status(202).send(new Error("invalid user name or password"));

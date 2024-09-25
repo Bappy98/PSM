@@ -1,36 +1,34 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 //import { useBranchCreateMutation } from '../../store/api/branch/branchApi';
-import fetchWrapper from '../../../util/fetchWrapper';
+import fetchWrapper from "../../util/fetchWrapper";
 
 const BranchCreate = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    phone: '',
-    logo: '',
+    name: "",
+    address: "",
+    phone: "",
+    logo: "",
   });
 
-   const user = useSelector((state) => state.user);
-   console.log(user);
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
   //const [branchCreate, { isLoading, isError, error }] = useBranchCreateMutation();
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
 
-    const data = await fetchWrapper.post('/branch/Create',formData)
-    if(data) {
-      console.log('saved successfully!');
+    const data = await fetchWrapper.post("/branch/Create", formData);
+    if (data) {
+      console.log("saved successfully!");
     }
     setFormData({
-      name: '',
-      address: '',
-      phone: '',
-      logo: '',
+      name: "",
+      address: "",
+      phone: "",
+      logo: "",
     });
-   
   };
 
   const handleChange = (e) => {
@@ -46,7 +44,12 @@ const BranchCreate = () => {
       <h2 className="text-2xl font-bold mb-6">Create Branch</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -58,7 +61,12 @@ const BranchCreate = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
+          <label
+            htmlFor="address"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Address
+          </label>
           <input
             type="text"
             id="address"
@@ -70,7 +78,12 @@ const BranchCreate = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Phone
+          </label>
           <input
             type="text"
             id="phone"
@@ -82,7 +95,12 @@ const BranchCreate = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="logo" className="block text-sm font-medium text-gray-700">Logo (Optional)</label>
+          <label
+            htmlFor="logo"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Logo (Optional)
+          </label>
           <input
             type="text"
             id="logo"
@@ -96,12 +114,10 @@ const BranchCreate = () => {
           type="submit"
           className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
         >
-          {0 ? 'Submitting...' : 'Submit'}
+          {0 ? "Submitting..." : "Submit"}
         </button>
-        
       </form>
     </div>
-    
   );
 };
 

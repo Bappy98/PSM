@@ -7,7 +7,7 @@ import Title from "../title/Title";
 import FileInput from "../ui/FileInput";
 import * as yup from "yup";
 import Button from "../Button/Button";
-import fetchWrapper from "../../../util/fetchWrapper";
+import fetchWrapper from "../../util/fetchWrapper";
 import { useGetCompanyQuery } from "../../store/api/company/companyApiSlice";
 import Textarea from "../ui/Textarea";
 
@@ -20,7 +20,7 @@ const schema = yup
     company: yup.string().required().label("Company"),
     generic: yup.string().required().label("Generic"),
     dosages: yup.string().required().label("Dosages"),
-    description:yup.string().required()
+    description: yup.string().required(),
   })
   .required();
 
@@ -36,13 +36,15 @@ function MedicineForm() {
     resolver: yupResolver(schema),
   });
   const [base64Logo, setBase64Logo] = useState(null);
-  const {data:company,error,loading} = useGetCompanyQuery()
-  const [companyOptions,setCompanyOptions] = useState([])
-  useEffect(()=>{
-    if(company?.data) {
-      setCompanyOptions(company?.data.map((item)=>item.name))
+  const { data: company, error, loading } = useGetCompanyQuery();
+  const [companyOptions, setCompanyOptions] = useState([]);
+  console.log(company);
+  
+  useEffect(() => {
+    if (company) {
+      setCompanyOptions(company.map((item) => item.name));
     }
-  },[company])
+  }, [company]);
 
   //console.log(companyOptions);
 
@@ -52,10 +54,16 @@ function MedicineForm() {
         ...data,
         image: base64Logo,
       };
-      console.log(formData);
-      const res = await fetchWrapper.post("/medicine/Create", formData);
-      reset();
-    } catch (error) {}
+
+      console.log("Form Data:", formData);
+
+      const res = await fetchWrapper.post("/medicine/create", formData);
+      //console.log("Response:", res);
+      reset()
+    
+    } catch (error) {
+      console.error("Error during form submission:", error);
+    }
   };
 
   return (
@@ -130,28 +138,34 @@ function MedicineForm() {
             placeholder="Select Dosages name"
             className="max-w-96 w-full mt-2"
           />
-            <Textarea
-              label={"Description :"}
-              register={register}
-              placeholder="description"
-              className="max-w-96 mt-2 w-full"
-              type={"text"}
-              row={'5'}
-  
-              name="description"
-              error={errors.description}
-            />
+          <Textarea
+            label={"Description :"}
+            register={register}
+            placeholder="description"
+            className="max-w-96 mt-2 w-full"
+            type={"text"}
+            row={"5"}
+            name="description"
+            error={errors.description}
+          />
           <Select
             label={"Type"}
             defaultValue={""}
-            options={["Tablet","Syrup","Capsules","Drops","Inhalers","Injections","Implants or patches"]}
+            options={[
+              "Tablet",
+              "Syrup",
+              "Capsules",
+              "Drops",
+              "Inhalers",
+              "Injections",
+              "Implants or patches",
+            ]}
             name="type"
             register={register}
             error={errors.type}
             placeholder="Select type"
             className="max-w-96 w-full mt-2"
           />
-          
         </div>
         <Button>Add Medicine</Button>
       </form>

@@ -1,19 +1,27 @@
+import BranchRoute from "@/authGard/BranchRoute";
+import PrivateRoute from "@/authGard/PrivateRoute";
+import PublicRoute from "@/authGard/PublicRoute";
+import BranchUserLayout from "@/layouts/branch/BranchUserLayout";
+import Layout from "@/layouts/dashboard/Layout";
+import UserLayout from "@/layouts/user/UserLayout";
+import Dashboard from "@/pages/admin/dashboard/Dashboard";
+import Stock from "@/pages/admin/stock";
+import Login from "@/pages/auth/Login";
+import BranchList from "@/pages/branch/BranchList";
+import BranchHome from "@/pages/BranchPages/home";
+import MedicineReq from "@/pages/BranchPages/medicineRequest";
+import BranchStore from "@/pages/BranchPages/store";
+import BranchRegister from "@/pages/branchRegister";
+import CompanyCreate from "@/pages/company";
+import CompanyList from "@/pages/company/CompanyList";
+import BranchCreate from "@/pages/CreateBranch";
+import CreateDosages from "@/pages/dosages";
+import CreateGeneric from "@/pages/generices";
+import Homepage from "@/pages/home/Homepage";
+import MedicineCreate from "@/pages/medicine";
+import MedicineList from "@/pages/medicine/MedicineList";
 import { createBrowserRouter } from "react-router-dom";
-import Login from "./../pages/auth/Login";
-import Layout from "./../layouts/dashboard/Layout";
-import Homepage from "./../pages/home/Homepage";
-import UserLayout from "./../layouts/user/UserLayout";
-import PrivateRoute from "./../authGard/PrivateRoute";
-//import BranchRouter from './../authGard/BranchRoute'
-import PublicRoute from "./../authGard/PublicRoute";
-import Dashboard from "./../pages/admin/dashboard/Dashboard";
-import BranchRegister from './../pages/branchRegister'
-import BranchCreate from "../pages/CreateBranch";
-import CompanyCreate from "../pages/company";
-import CreateGeneric from "../pages/generices";
-import CreateDosages from "../pages/dosages";
-import MedicineCreate from "../pages/medicine";
-import BranchList from "../pages/branch/BranchList";
+
 
 export const router = createBrowserRouter([
   {
@@ -32,20 +40,7 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
     ],
-   },
-  // {
-  //   element:(
-  //     <BranchRouter>
-  //     <Layout/>
-  //     </BranchRouter>
-  //   ),
-  //   children:[
-  //     {
-  //       path: "/dashboard",
-  //       element: <Dashboard />,
-  //     },
-  //   ]
-  // },
+  },
   {
     element: (
       <PrivateRoute>
@@ -58,34 +53,66 @@ export const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path:'/branch-register',
-        element:<BranchRegister/>
+        path: "/stock-dashboard",
+        element: <Stock />,
       },
       {
-        path:'/branch-create',
-        element:<BranchCreate/>
+        path: "/branch-register",
+        element: <BranchRegister />,
       },
       {
-        path:'/company-create',
-        element:<CompanyCreate/>
+        path: "/branch-create",
+        element: <BranchCreate />,
       },
       {
-        path:'/generics-create',
-        element:<CreateGeneric/>
+        path: "/company-create",
+        element: <CompanyCreate />,
       },
       {
-        path:'/dosages-create',
-        element:<CreateDosages/>
+        path:'/company-list',
+        element:<CompanyList/>
       },
       {
-        path:'/medicine-create',
-        element:<MedicineCreate/>
+        path: "/generics-create",
+        element: <CreateGeneric />,
       },
       {
-        path:'/branches',
-        element:<BranchList/>
+        path: "/dosages-create",
+        element: <CreateDosages />,
+      },
+      {
+        path: "/medicine-create",
+        element: <MedicineCreate />,
+      },
+      {
+        path:"/medicine-list",
+        element:<MedicineList/>
+      },
+      {
+        path: "/branches",
+        element: <BranchList />,
+      },
+    ],
+  },
+  {
+    element: (
+      <PrivateRoute>
+        <BranchUserLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/branch",
+        element: <BranchHome />,
+      },
+      {
+        path:"/branchStore",
+        element:<BranchStore/>
+      },
+      {
+        path:'/checkout',
+        element:<MedicineReq/>
       }
     ],
   },
-  
 ]);

@@ -15,3 +15,7 @@
     /*background-color: rgba(9, 0, 0, 0.971); */
     /* Adjust the color and opacity as needed */
   }
+
+  .btn {
+    @apply bg-white p-1 mx-1 rounded-md my-2 disabled:opacity-60
+  }

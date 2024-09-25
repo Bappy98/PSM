@@ -10,11 +10,11 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <>
     <StyledEngineProvider>
       <Provider store={store}>
         <App />
       </Provider>
     </StyledEngineProvider>
-  </React.StrictMode>
+  </>
 );

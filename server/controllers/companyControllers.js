@@ -32,11 +32,10 @@ const createCompany = asyncHandler(async (req, res) => {
 
 const getAllCompany = asyncHandler(async (req, res) => {
   try {
-    const company = await Company.find({});
-    res.status(200).json({
-      message: "A list of all Branch",
-      data: company,
-    });
+    const data = await Company.find({});
+    res.status(200).json(
+   data,
+    );
   } catch (error) {
     res
       .status(500)
