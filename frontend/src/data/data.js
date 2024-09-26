@@ -11,7 +11,7 @@ export const branchNav = [
     },
     {
         name:'Sell',
-        link:'/sel'
+        link:'/sell'
     },
     {
         name:'Checkout',

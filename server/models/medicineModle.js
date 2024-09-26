@@ -8,9 +8,6 @@ const medicineSchema = new mongoose.Schema({
     weight:{
         type:String,
         //required:true
-    },
-    singleBoxPrice:{
-        type:Number
     }
     ,
     unitPrice:{

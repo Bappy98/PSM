@@ -1,3 +1,4 @@
+import Button from "@/components/Button/Button";
 import DataGrid from "@/components/shared/dataTable/DataGrid";
 import { useGetMedicineQuery } from "@/store/api/medicine/medicineApiSlice";
 import React from "react";
@@ -35,6 +36,7 @@ function MedicineList() {
 
   return (
     <div>
+      <Button link={'/medicine-create'}>Create Medicine</Button>
       <DataGrid data={data} column={COLUMN} />
     </div>
   );

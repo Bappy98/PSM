@@ -19,3 +19,15 @@
   .btn {
     @apply bg-white p-1 mx-1 rounded-md my-2 disabled:opacity-60
   }
+  .btn1 {
+    @apply  p-2 mx-1 rounded-md my-2 disabled:opacity-60
+  }
+
+  .btnDiv{
+    @apply flex  py-5 mx-5 
+  }
+  .button {
+    @apply relative flex items-center justify-center p-3 bg-blue-500 text-white rounded
+  }
+
+  

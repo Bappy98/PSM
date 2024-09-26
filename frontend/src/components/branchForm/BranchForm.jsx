@@ -9,6 +9,7 @@ import TextInput from "@/components/ui/TextInput";
 import FileInput from "@/components/ui/FileInput";
 import Title from "@/components/title/Title";
 import Select from "@/components/ui/Select";
+import Button from "@/components/Button/Button";
 
 const schema = yup
   .object({
@@ -108,7 +109,7 @@ function BranchForm() {
             error={errors.phone}
           />
         </div>
-        <Button>Branch Create</Button>
+        <Button type='submit'>Branch Create</Button>
       </form>
     </div>
   );

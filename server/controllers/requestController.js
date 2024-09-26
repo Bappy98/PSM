@@ -96,11 +96,32 @@ const acceptMedicineRequest = asyncHandler(async (req, res) => {
 
 const getAllRequest = asyncHandler(async (req,res)=>{
     try {
-        const data = await MedicineRequest.find({})
+        const data = await MedicineRequest.find({}).populate('user')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).json({ error: error.message || "Server error" });
     }
 })
 
-module.exports = { requestMedicine, acceptMedicineRequest,getAllRequest };
+const getRequestById = asyncHandler(async (req, res) => {
+  const { id } = req.params; 
+
+  try {
+    const request = await MedicineRequest.findById(id).populate('user').populate({
+      path: 'medicines.medicine', 
+      populate: {
+        path: 'company', 
+        model: 'Company',
+      },
+    });
+    if (!request) {
+      return res.status(404).json({ error: 'Medicine request not found' });
+    }
+    res.status(200).json(request);
+  } catch (error) {
+    res.status(500).json({ error: error.message || 'Server error' });
+  }
+});
+
+
+module.exports = { requestMedicine, acceptMedicineRequest,getAllRequest,getRequestById };

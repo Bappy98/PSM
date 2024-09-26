@@ -15,7 +15,6 @@ const schema = yup
   .object({
     name: yup.string().required().label("Name"),
     unitPrice: yup.number().required().label("Unit price"),
-    singleBoxPrice: yup.string(),
     type: yup.string().required().label("Type"),
     company: yup.string().required().label("Company"),
     generic: yup.string().required().label("Generic"),
@@ -101,15 +100,6 @@ function MedicineForm() {
             error={errors.unitPrice}
             placeholder="Unit Price"
           />
-          <TextInput
-            label={"singleBoxPrice"}
-            register={register}
-            type={"singleBoxPrice"}
-            name="singleBoxPrice"
-            className="max-w-96 w-full"
-            error={errors.unitPrice}
-            placeholder="singleBoxPrice"
-          />
           <Select
             label={"Company"}
             defaultValue={""}
@@ -138,16 +128,6 @@ function MedicineForm() {
             placeholder="Select Dosages name"
             className="max-w-96 w-full mt-2"
           />
-          <Textarea
-            label={"Description :"}
-            register={register}
-            placeholder="description"
-            className="max-w-96 mt-2 w-full"
-            type={"text"}
-            row={"5"}
-            name="description"
-            error={errors.description}
-          />
           <Select
             label={"Type"}
             defaultValue={""}
@@ -165,6 +145,16 @@ function MedicineForm() {
             error={errors.type}
             placeholder="Select type"
             className="max-w-96 w-full mt-2"
+          />
+           <Textarea
+            label={"Description :"}
+            register={register}
+            placeholder="description"
+            className="max-w-96 mt-2 w-full"
+            type={"text"}
+            row={"5"}
+            name="description"
+            error={errors.description}
           />
         </div>
         <Button>Add Medicine</Button>

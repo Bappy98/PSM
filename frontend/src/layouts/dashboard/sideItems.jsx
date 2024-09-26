@@ -15,15 +15,28 @@ export const sidebarItems = [
       linkto:"/stock-dashboard"
     },
     {
+      icon: <ImportContactsOutlined />,
+      label: "Medicine req",
+      dropdown:false,
+      linkto:"/medicine-req"
+    },
+    {
+      icon: <ImportContactsOutlined />,
+      label: "Users",
+      dropdown:false,
+      linkto:"/users"
+    },
+    {
+      icon: <ImportContactsOutlined />,
+      label: "Branch",
+      dropdown:false,
+      linkto:"/branches"
+    },
+    {
       icon: <HomeRepairServiceOutlined />,
       label: "Company",
-      dropdown: true,
-      dropdownItems: [
-        { label: "Company List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/company-list"  },
-        { label: "Company Create",dropIcon:<HomeRepairServiceOutlined />,linkTo:"/company-create" },
-       
-      
-      ],
+      dropdown: false,
+      linkto:"/company-list"
     },
     {
       icon: <HomeRepairServiceOutlined />,
@@ -32,39 +45,14 @@ export const sidebarItems = [
       dropdownItems: [
         { label: "user Register",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch-register"   },
         { label: "Create Branch",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch-create"   },
-        { label: "Branch List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branches"   },
       
       ],
     },
-    // {
-    //   icon: <HomeRepairServiceOutlined />,
-    //   label: "Generics",
-    //   dropdown: true,
-    //   dropdownItems: [
-    //     { label: "Create Generics",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/generics-create"   },
-    //     { label: "Generics List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch"   },
-      
-    //   ],
-    // },
-    // {
-    //   icon: <HomeRepairServiceOutlined />,
-    //   label: "Dosages",
-    //   dropdown: true,
-    //   dropdownItems: [
-    //     { label: "Create Dosages",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/dosages-create"   },
-    //     { label: "Dosages List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/dosages"   },
-      
-    //   ],
-    // },
     {
       icon: <HomeRepairServiceOutlined />,
       label: "Medicine",
-      dropdown: true,
-      dropdownItems: [
-        { label: "Medicine Add",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/medicine-create"   },
-        { label: "Medicine List",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/medicine-list"   }
-      
-      ],
+      dropdown: false,
+      linkto:"/medicine-list"
     },
     // Add more items as needed
   ];

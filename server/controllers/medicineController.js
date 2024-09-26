@@ -14,7 +14,6 @@ const cerateMedicine = asyncHandler(async (req, res) => {
     generics,
     company,
     type,
-    singleBoxPrice,
     description,
     image,
   } = req.body;
@@ -37,7 +36,6 @@ const cerateMedicine = asyncHandler(async (req, res) => {
         dosages,
         generics,
         company: singleCompany._id,
-        singleBoxPrice,
         description,
         type,
         image,
@@ -109,7 +107,6 @@ const updateMedicine = asyncHandler(async (req, res) => {
       generics,
       company,
       type,
-      singleBoxPrice,
       description,
       image,
     } = req.body;
@@ -124,7 +121,6 @@ const updateMedicine = asyncHandler(async (req, res) => {
     medicine.image = image || medicine.image;
     medicine.weight = weight || medicine.weight;
     medicine.unitPrice = unitPrice || medicine.unitPrice;
-    medicine.singleBoxPrice = singleBoxPrice || medicine.singleBoxPrice;
     medicine.type = type || medicine.type;
     medicine.dosages = dosages || medicine.dosages;
     medicine.generics = generics || medicine.generics;

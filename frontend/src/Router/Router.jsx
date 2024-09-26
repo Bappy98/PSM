@@ -5,11 +5,14 @@ import BranchUserLayout from "@/layouts/branch/BranchUserLayout";
 import Layout from "@/layouts/dashboard/Layout";
 import UserLayout from "@/layouts/user/UserLayout";
 import Dashboard from "@/pages/admin/dashboard/Dashboard";
+import MedicineRequest from "@/pages/admin/medicineReq";
 import Stock from "@/pages/admin/stock";
+import Users from "@/pages/admin/users";
 import Login from "@/pages/auth/Login";
 import BranchList from "@/pages/branch/BranchList";
 import BranchHome from "@/pages/BranchPages/home";
 import MedicineReq from "@/pages/BranchPages/medicineRequest";
+import Sell from "@/pages/BranchPages/sell";
 import BranchStore from "@/pages/BranchPages/store";
 import BranchRegister from "@/pages/branchRegister";
 import CompanyCreate from "@/pages/company";
@@ -73,14 +76,6 @@ export const router = createBrowserRouter([
         element:<CompanyList/>
       },
       {
-        path: "/generics-create",
-        element: <CreateGeneric />,
-      },
-      {
-        path: "/dosages-create",
-        element: <CreateDosages />,
-      },
-      {
         path: "/medicine-create",
         element: <MedicineCreate />,
       },
@@ -92,6 +87,14 @@ export const router = createBrowserRouter([
         path: "/branches",
         element: <BranchList />,
       },
+      {
+        path:"/medicine-req",
+        element:<MedicineRequest/>
+      },
+      {
+        path:"/users",
+        element:<Users/>
+      }
     ],
   },
   {
@@ -112,6 +115,10 @@ export const router = createBrowserRouter([
       {
         path:'/checkout',
         element:<MedicineReq/>
+      },
+      {
+        path:'/sell',
+        element:<Sell/>
       }
     ],
   },

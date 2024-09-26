@@ -11,7 +11,7 @@ const initialState = {
 
 export const getUsers = createAsyncThunk("user/getUsers", async () => {
   try {
-    const response = await fetchWrapper(`users`);
+    const response = await fetchWrapper.get(`/users`);
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : error.message;

@@ -4,7 +4,7 @@ const initialState = {
     requestM: []
 };
 
-const requestMedicine = createSlice({
+export const requestMedicine = createSlice({
     name: 'request',
     initialState,
     reducers: {

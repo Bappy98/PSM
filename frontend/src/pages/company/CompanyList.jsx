@@ -8,6 +8,7 @@ import {
 } from "react-table";
 import { Icon } from "@iconify/react";
 import GlobalFilter from "@/pages/company/GlobalFilter";
+import Button from "@/components/Button/Button";
 
 function CompanyList() {
   const [list, setList] = useState([]);
@@ -79,6 +80,7 @@ function CompanyList() {
 
   return (
     <>
+    <Button link={'/company-create'}>Create company</Button>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
         <table

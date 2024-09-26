@@ -11,8 +11,9 @@ import {
 import { useDispatch } from "react-redux";
 import { addMedicine } from "@/store/api/requastMedicne/requestSlice";
 import AddMedicineReq from "@/components/addMedicineReq";
+import ProductSell from "@/components/sells";
 
-function BranchTable({ data, column,open,setOpen }) {
+function SellTable({ data, column,open,setOpen }) {
     const dataMemo = useMemo(() => data || [], [data]);
   const columnMemo = useMemo(() => column, []);
 
@@ -77,11 +78,12 @@ function BranchTable({ data, column,open,setOpen }) {
 
   const { globalFiler, pageIndex, pageSize } = state;
   return (
-    <div className="relative ">
-      <div className="btnDiv justify-end">
+    <div className="relative">
+     <div className="btnDiv justify-end">
       <button className="relative flex items-center justify-center p-3 bg-blue-500 text-white rounded" onClick={()=>setOpen(true)}>Order</button>
       </div>
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+      
       <GlobalFilter filter={globalFiler} setFilter={setGlobalFilter} />
       <table
         {...getTableProps()}
@@ -185,11 +187,11 @@ function BranchTable({ data, column,open,setOpen }) {
         </button>
       </div>
     </div>
-
-      {open && <AddMedicineReq data = {selectedFlatRows} setOpen={setOpen}/>}
-  
+    {
+      open && <ProductSell data={selectedFlatRows} setOpen={setOpen}/>
+    }
   </div>
   )
 }
 
-export default BranchTable
+export default SellTable

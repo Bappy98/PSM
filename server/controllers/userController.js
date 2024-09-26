@@ -55,11 +55,8 @@ const userById = asyncHandler(async(req,res)=>{
 
 const getAllUsers = asyncHandler(async (req, res) => {
   try {
-    const allUsers = await User.find({ userType: 'branch' });
-    res.json({
-      message: "successfully registration",
-      data: allUsers,
-    });
+    const data = await User.find({ userType: 'branch' });
+    res.json(data);
   } catch (error) {
     console.log(error);
   }

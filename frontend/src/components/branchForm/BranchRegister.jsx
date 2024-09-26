@@ -18,7 +18,7 @@ const schema = yup
   })
   .required();
 function Register() {
-  const { successToast, errorToast } = useToast();
+ 
   const {
     register,
     formState: { errors },

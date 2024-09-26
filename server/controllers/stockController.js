@@ -1,10 +1,12 @@
 const asyncHandler = require("express-async-handler");
 const Stock = require("../models/stockModle");
+const User = require("../models/userModel");
 //const { convertToPieces } = require("../utils/medicineCounter");
 
 const getStock = asyncHandler(async(req,res)=>{
     try {
         const {userId} = req.params;
+       // const admin = await User.find({userType:"superadmin"})
         const stock = await Stock.find({user:userId}) .populate({
             path: 'medicine',
             populate: {
@@ -20,6 +22,8 @@ const getStock = asyncHandler(async(req,res)=>{
         res.status(500).json({ error: 'Server error' });
     }
 })
+
+
 
 const addStock = asyncHandler(async (req, res) => {
     const {userId,id} = req.params
