@@ -23,15 +23,34 @@ function CreateCompany() {
     register,
     formState: { errors },
     handleSubmit,
-    control
+    control,
+    reset
   } = useForm({
     mode: "all",
     resolver: yupResolver(schema),
   });
+
+  const onSubmit = async (data) =>{
+    const formData = {
+      ...data,
+      logo: base64Logo,
+    };
+    console.log(formData);
+    
+    try {
+      const res = await fetchWrapper.post("/company/create", formData);
+      reset();
+      Navigate('/company-list')
+      setBase64Logo(null);
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <div className="max-w-[900px] bg-blue-300 p-5">
       <Title>Create Company</Title>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-5">
           <FileInput
             label="Logo"
@@ -73,7 +92,9 @@ function CreateCompany() {
             error={errors.phone}
           />
         </div>
-        <Button>Create</Button>
+        <div className="btnDiv justify-end">
+        <button className="button" type="submit">Create</button>
+        </div>
       </form>
     </div>
   );

@@ -3,8 +3,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Title from "@/components/title/Title";
 import TextInput from "@/components/ui/TextInput";
-import Button from "@/components/Button/Button";
 import fetchWrapper from "@/util/fetchWrapper";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -18,7 +18,7 @@ const schema = yup
   })
   .required();
 function Register() {
- 
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -32,6 +32,7 @@ function Register() {
     console.log(data);
     try {
       const res = await fetchWrapper.post("/branch/register", data);
+      navigate("/users");
       reset();
       successToast("successful");
     } catch (error) {
@@ -88,7 +89,11 @@ function Register() {
             defaultValue={"branch"}
           />
         </div>
-        <Button>Register</Button>
+        <div className="btnDiv justify-end">
+          <button className="button" type="submit">
+            Register
+          </button>
+        </div>
       </form>
     </div>
   );

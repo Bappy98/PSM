@@ -9,7 +9,7 @@ import TextInput from "@/components/ui/TextInput";
 import FileInput from "@/components/ui/FileInput";
 import Title from "@/components/title/Title";
 import Select from "@/components/ui/Select";
-import Button from "@/components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -25,18 +25,22 @@ function BranchForm() {
   const { users } = useSelector((state) => state.users);
   const [base64Logo, setBase64Logo] = useState(null);
   const [name, setName] = useState([]);
+  const navigate = useNavigate()
 
+  // useEffect(() => {
+  //   dispatch(getUsers());
+  // }, [dispatch]);
+  // console.log(users.data);
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
-  //console.log(users.data);
-  useEffect(() => {
-    if (users?.data) {
-      setName(users?.data.map((user) => user.name));
+    if (users) {
+      setName(users.map((user) => user.name));
     }
   }, [users]);
 
-  //console.log(name);
+   console.log(name);
+
+  console.log(users);
+  
 
   const {
     register,
@@ -57,6 +61,7 @@ function BranchForm() {
     console.log(formData);
     try {
       const res = await fetchWrapper.post("/branch/create", formData);
+      navigate('/branches')
       reset();
       setBase64Logo(null);
     } catch (error) {}
@@ -109,7 +114,9 @@ function BranchForm() {
             error={errors.phone}
           />
         </div>
-        <Button type='submit'>Branch Create</Button>
+        <div className="btnDiv justify-end">
+        <button className="button" type='submit'>Branch Create</button>
+        </div>
       </form>
     </div>
   );

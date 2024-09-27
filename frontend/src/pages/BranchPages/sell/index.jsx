@@ -9,6 +9,8 @@ function Sell() {
     const {stock } = useSelector((state)=> state.stock)
     const dispatch = useDispatch()
     const [open,setOpen] = useState(null)
+    console.log(stock);
+    
     useEffect(() => {
         if (userId) {
           dispatch(getStock({ userId }));
@@ -26,6 +28,10 @@ function Sell() {
         {
           Header: 'Company',
           accessor: row => row.medicine?.company.name,
+        },
+        {
+          Header:'UnitPrice',
+          accessor: row => row.medicine?.unitPrice,
         },
         {
           Header: 'Quantity',

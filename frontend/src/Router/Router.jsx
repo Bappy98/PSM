@@ -10,6 +10,8 @@ import Stock from "@/pages/admin/stock";
 import Users from "@/pages/admin/users";
 import Login from "@/pages/auth/Login";
 import BranchList from "@/pages/branch/BranchList";
+import Check from "@/pages/BranchPages/checkout";
+import Checkout from "@/pages/BranchPages/checkout";
 import BranchHome from "@/pages/BranchPages/home";
 import MedicineReq from "@/pages/BranchPages/medicineRequest";
 import Sell from "@/pages/BranchPages/sell";
@@ -112,13 +114,17 @@ export const router = createBrowserRouter([
         path:"/branchStore",
         element:<BranchStore/>
       },
-      {
-        path:'/checkout',
-        element:<MedicineReq/>
-      },
+      // {
+      //   path:'/checkout',
+      //   element:<MedicineReq/>
+      // },
       {
         path:'/sell',
         element:<Sell/>
+      },
+      {
+        path:"/checkout",
+        element:<Check/>
       }
     ],
   },

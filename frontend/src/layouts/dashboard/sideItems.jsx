@@ -40,16 +40,6 @@ export const sidebarItems = [
     },
     {
       icon: <HomeRepairServiceOutlined />,
-      label: "Branch",
-      dropdown: true,
-      dropdownItems: [
-        { label: "user Register",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch-register"   },
-        { label: "Create Branch",dropIcon:<HomeRepairServiceOutlined /> ,linkTo:"/branch-create"   },
-      
-      ],
-    },
-    {
-      icon: <HomeRepairServiceOutlined />,
       label: "Medicine",
       dropdown: false,
       linkto:"/medicine-list"

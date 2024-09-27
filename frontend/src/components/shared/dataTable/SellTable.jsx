@@ -19,6 +19,7 @@ function SellTable({ data, column,open,setOpen }) {
 
   const dispatch = useDispatch()
   
+  console.log("data",data);
   
   const {
     getTableBodyProps,

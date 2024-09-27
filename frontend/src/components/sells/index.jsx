@@ -2,10 +2,15 @@ import { selectCurrentUser } from '@/store/api/auth/authSlice';
 import { Icon } from '@iconify/react';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ProductSell({data,setOpen}) {
     const userId = useSelector(selectCurrentUser)
      const [addMedicine, setAddMedicine] = useState([]);
+    // const [sellData,setSellData] = useState(null)
+     const navigate = useNavigate()
+     console.log("selldata",data);
+     
  
      useEffect(() => {
          const result = data.map(cur => ({
@@ -13,10 +18,14 @@ function ProductSell({data,setOpen}) {
              name:cur.original.medicine.name,
              type:cur.original.medicine.type,
              stock:cur.original.quantity,
+             price:cur.original.unitPrice,
              quantity: 0,
          }));
          setAddMedicine(result);
      }, [data]);
+
+     console.log('result',addMedicine);
+     
  
      const handleChange = (e, index) => {
          const { name, value } = e.target;
@@ -29,20 +38,16 @@ function ProductSell({data,setOpen}) {
          );
      };
  
-     const handleSubmit = async (e) => {
+     const handleSubmit = (e) => {
          e.preventDefault();
  
-         const requestBody = {
+         const sellData = {
              userId, // The user requesting the medicines
              medicines: addMedicine // The list of medicines and their quantities
          };
+         //setSellData(sellData)
+         navigate('/checkout', { state: sellData }); 
  
-         try {
-             await fetchWrapper.post('/medicine-request', requestBody);
-             console.log('Request successful:', requestBody);
-         } catch (error) {
-             console.error('Error submitting medicine request:', error);
-         }
      };
  
      console.log(addMedicine);
@@ -64,6 +69,7 @@ function ProductSell({data,setOpen}) {
                       <div>Name : {item.name}</div>
                       <div> Type : {item.type} </div>
                       <div>Stock : {item.stock}</div>
+                      <div>UnitPrice: {item.unitPrice}</div>
                       <div className='col-span-2'>
                          <label htmlFor="">Enter Number</label>
                          <input className='bg-green-100 border-black-500 border-solid border-2 m-1 px-2'
@@ -79,7 +85,7 @@ function ProductSell({data,setOpen}) {
                      </div>
                  ))}
                  <div className='flex  py-5 mx-5 justify-center'>
-                 <button type="submit" className='relative flex items-center justify-center p-3 bg-blue-500 text-white rounded'>Submit</button>
+                <> <button type="submit" className='relative flex items-center justify-center p-3 bg-blue-500 text-white rounded'>Next</button></>
                  </div>
              </form>
            </div>

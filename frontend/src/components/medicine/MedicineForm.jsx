@@ -157,7 +157,9 @@ function MedicineForm() {
             error={errors.description}
           />
         </div>
-        <Button>Add Medicine</Button>
+        <div className="btnDiv justify-end">
+        <button className="button" type="submit">Add Medicine</button>
+        </div>
       </form>
     </div>
   );

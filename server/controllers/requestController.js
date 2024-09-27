@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const MedicineRequest = require("../models/medicineReqyestModel");
-const { io } = require("../server");
 const Stock = require("../models/stockModle");
 
 const requestMedicine = asyncHandler(async (req, res) => {
