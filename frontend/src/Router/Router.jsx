@@ -10,13 +10,13 @@ import Stock from "@/pages/admin/stock";
 import Users from "@/pages/admin/users";
 import Login from "@/pages/auth/Login";
 import BranchList from "@/pages/branch/BranchList";
-import Check from "@/pages/BranchPages/checkout";
 import Checkout from "@/pages/BranchPages/checkout";
 import BranchHome from "@/pages/BranchPages/home";
 import MedicineReq from "@/pages/BranchPages/medicineRequest";
 import Sell from "@/pages/BranchPages/sell";
 import BranchStore from "@/pages/BranchPages/store";
 import BranchRegister from "@/pages/branchRegister";
+import CashMemo from "@/pages/cashMemo";
 import CompanyCreate from "@/pages/company";
 import CompanyList from "@/pages/company/CompanyList";
 import BranchCreate from "@/pages/CreateBranch";
@@ -124,7 +124,11 @@ export const router = createBrowserRouter([
       },
       {
         path:"/checkout",
-        element:<Check/>
+        element:<Checkout/>
+      },
+      {
+        path:'/cash-memo',
+        element:<CashMemo/>
       }
     ],
   },

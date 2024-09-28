@@ -41,7 +41,7 @@ function AddMedicine({ data ,setOpen}) {
 
         try {
             await fetchWrapper.post('/medicine-request', requestBody);
-            console.log('Request successful:', requestBody);
+            setOpen(null)
         } catch (error) {
             console.error('Error submitting medicine request:', error);
         }

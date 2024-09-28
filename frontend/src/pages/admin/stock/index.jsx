@@ -25,10 +25,13 @@ function Stock() {
   
 
   useEffect(() => {
-    if (userId) {
+    if (userId ||isModalOpen === null) {
       dispatch(getStock({ userId }));
     }
+    
   }, [dispatch, userId,isModalOpen]);
+
+  
 
   const COLUMN = [
     {
@@ -64,7 +67,7 @@ function Stock() {
   ];
 
   const onSubmit = async (data) => {
-    console.log(data);
+    //console.log(data);
     
     try {
       const res = await fetchWrapper.post(`/stock/add/${userId}/${isModalOpen.id}`,data)
