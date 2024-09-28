@@ -29,6 +29,7 @@ function MedicineList() {
       Header: "Type",
       accessor:'type'
     },
+    
     {
       Header: "Unit Price",
       accessor:'unitPrice'
