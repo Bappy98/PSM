@@ -7,6 +7,8 @@ import Button from "../Button/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import fetchWrapper from "@/util/fetchWrapper";
 
 const schema = yup
   .object()
@@ -19,6 +21,7 @@ const schema = yup
   .required();
 function CreateCompany() {
   const [base64Logo, setBase64Logo] = useState(null);
+  const navigate = useNavigate()
   const {
     register,
     formState: { errors },
@@ -30,37 +33,39 @@ function CreateCompany() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) =>{
+  const onSubmit = async (data) => {
     const formData = {
       ...data,
       logo: base64Logo,
     };
-    console.log(formData);
-    
+  
     try {
       const res = await fetchWrapper.post("/company/create", formData);
-      reset();
-      Navigate('/company-list')
-      setBase64Logo(null);
-    } catch (error) {
       
+      reset();  
+      navigate('/company-list'); 
+      setBase64Logo(null);  // Reset base64Logo state
+    } catch (error) {
+      console.error('Error creating company:', error);
+      // Handle error state or show error message to user
     }
-  }
+  };
+  
 
   return (
     <div className="max-w-[900px] bg-blue-300 p-5">
       <Title>Create Company</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-5">
-          <FileInput
-            label="Logo"
-            name="logo"
+        <FileInput
+            label="Image"
+            name="image"
             register={register}
             control={control}
-            error={errors.logo}
+            error={errors.image}
             setBase64Logo={setBase64Logo}
             base64Logo={base64Logo}
-            id="logo"
+            id="image"
             required={true}
           />
         </div>
@@ -71,6 +76,7 @@ function CreateCompany() {
             error={errors.name}
             className="max-w-96 w-full px-2"
             type="text"
+            name={'name'}
             placeholder="Company name"
           />
           <TextInput

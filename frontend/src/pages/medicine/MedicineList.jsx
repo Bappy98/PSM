@@ -1,10 +1,13 @@
 import Button from "@/components/Button/Button";
 import DataGrid from "@/components/shared/dataTable/DataGrid";
 import { useGetMedicineQuery } from "@/store/api/medicine/medicineApiSlice";
-import React from "react";
+import React, { useEffect, useState } from "react";
+//import { set } from "react-hook-form";
 
 function MedicineList() {
+  const [medicines,setMedicines] = useState(null)
   const { data } = useGetMedicineQuery();
+  
   const COLUMN = [
     {
       Header: "No.",

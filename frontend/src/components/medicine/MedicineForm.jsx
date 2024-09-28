@@ -10,6 +10,7 @@ import Button from "../Button/Button";
 import fetchWrapper from "../../util/fetchWrapper";
 import { useGetCompanyQuery } from "../../store/api/company/companyApiSlice";
 import Textarea from "../ui/Textarea";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -38,7 +39,7 @@ function MedicineForm() {
   const { data: company, error, loading } = useGetCompanyQuery();
   const [companyOptions, setCompanyOptions] = useState([]);
   console.log(company);
-  
+  const navigate = useNavigate()
   useEffect(() => {
     if (company) {
       setCompanyOptions(company.map((item) => item.name));
@@ -57,6 +58,7 @@ function MedicineForm() {
       console.log("Form Data:", formData);
 
       const res = await fetchWrapper.post("/medicine/create", formData);
+      navigate("/medicine-list")
       //console.log("Response:", res);
       reset()
     
