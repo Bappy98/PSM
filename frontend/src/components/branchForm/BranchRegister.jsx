@@ -41,7 +41,7 @@ function Register() {
   };
 
   return (
-    <div className="max-w-[900px] bg-blue-200">
+    <div className="max-w-[900px] bg-blue-200 rounded-xl shadow-lg shadow-black-400">
       <Title>Branch Register</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid md:grid-cols-2 grid-cols-1 mx-5 gap-5">

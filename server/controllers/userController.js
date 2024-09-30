@@ -11,6 +11,7 @@ const login = asyncHandler(async (req, res) => {
       message: "Login success",
       _id: user._id,
       email: user.email,
+      userType:user.userType,
       token: generateToken(user._id)
     });
   } else {

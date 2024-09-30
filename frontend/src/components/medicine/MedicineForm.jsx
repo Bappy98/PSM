@@ -68,7 +68,7 @@ function MedicineForm() {
   };
 
   return (
-    <div className="max-w-[900px] bg-blue-300">
+    <div className="max-w-[900px] bg-blue-300 rounded-xl shadow-lg shadow-black-400">
       <Title>Create Medicine</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mx-5">

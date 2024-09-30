@@ -20,7 +20,11 @@ export const branchNav = [
 ]
 
 export const ProfileNav = [
-    { label: "Home", link: "/" },
     { label: "Profile", link: "/profile" },
     { label: "Logout", link: "/" },
   ]
+
+  export const ROLES = {
+    SUPER_ADMIN:'superadmin',
+    BRANCH:'branch'
+  }

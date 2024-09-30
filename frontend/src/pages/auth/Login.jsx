@@ -35,14 +35,18 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const userData = await login(data).unwrap();
+      console.log(userData);
+      
       dispatch(setUser({
         accessToken: userData?.token,
         user_id: userData?._id,
+        userType:userData?.userType
       }));
       dispatch(getUser({ user_id: userData._id, userType: userData.userType }));
       localStorage.setItem("auth", JSON.stringify({
         accessToken: userData?.token,
         user_id: userData._id,
+        userType: userData.userType
       }));
     } catch (error) {
       console.error("Login error:", error);

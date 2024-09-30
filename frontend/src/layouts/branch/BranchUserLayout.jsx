@@ -5,13 +5,13 @@ import * as React from "react";
 import Profile from "../../components/shared/Profile";
 import DropDown from "../../components/ui/Dropdown";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { logOut } from "../../store/api/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { logOut, selectCurrentToken, selectCurrentUserType } from "../../store/api/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function BranchUserLayout() {
-  const userName = "John Doe"; 
+  const [open,setOpen] = React.useState(false)
   // Replace with dynamic user name
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleLogOut = () => {
     localStorage.clear();
     dispatch(
@@ -23,7 +23,7 @@ function BranchUserLayout() {
   };
   return (
     <div>
-      <div className="bg-[#0ca0da]">
+      <div className="bg-[#7348c2]">
         <div className="container mx-auto flex justify-between h-24 w-full">
           <div className="items-center flex h-full">
             <img src={logo} alt="" className="h-16 w-16" />
@@ -40,29 +40,23 @@ function BranchUserLayout() {
             ))}
           </div>
           <div className="h-full flex items-center justify-center ">
-            <DropDown
-              label={
-                <div className="flex items-center">
-                  <Profile />
-                  
-                  <span className="block">{userName}</span>
-                </div>
-              }
-              className="ml-4 "
-              items={ProfileNav.map((item) => ({
-                label: item.label,
-                link: item.label === "Logout" ? "/" : item.link,
-                onClick: item.label === "Logout" ? handleLogOut : null,
-              }))}
-              wrapperClass="relative"
-              labelClass="text-white bg-blue-500 px-4 py-2 rounded-md cursor-pointer"
-              classMenuItems="mt-2 w-[150px] bg-white rounded-md shadow-lg"
-              classItem="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-            />
+           <div className="flex text-white items-center relative">
+           <button className="flex justify-center items-center" onClick={()=>setOpen(!open)}> <Profile/> <div>Faysal</div></button>
+           <div className={`absolute bg-black-100  px-4 py-4 text-black-500 rounded-lg top-12 ${open?'block':'hidden'}`}>
+            <Link>Profile</Link>
+            <button onClick={()=>{
+              handleLogOut()
+            }}>LogOut</button>
+           </div>
+           </div>
+          </div>
+          
+          <div>
+
           </div>
         </div>
       </div>
-      <Outlet />
+       <Outlet/>
     </div>
   );
 }

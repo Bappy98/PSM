@@ -68,7 +68,7 @@ function BranchForm() {
   };
 
   return (
-    <div className="max-w-[900px] bg-[#7acdee] p-5">
+    <div className="max-w-[900px] bg-[#7acdee] p-5 rounded-xl shadow-lg shadow-black-400">
       <Title>Branch Create</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-5">

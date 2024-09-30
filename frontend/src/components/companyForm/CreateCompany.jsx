@@ -53,7 +53,7 @@ function CreateCompany() {
   
 
   return (
-    <div className="max-w-[900px] bg-blue-300 p-5">
+    <div className="max-w-[900px] bg-blue-300 p-5 rounded-xl shadow-lg shadow-black-400">
       <Title>Create Company</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-5">
