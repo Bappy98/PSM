@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { branchNav, ProfileNav } from "../../data/data";
 import { logo } from "../../assets";
 import * as React from "react";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function BranchUserLayout() {
   const [open,setOpen] = React.useState(false)
+  const navigate = useNavigate()
   // Replace with dynamic user name
   const dispatch = useDispatch();
   const handleLogOut = () => {
@@ -20,6 +21,7 @@ function BranchUserLayout() {
         user_id: null,
       })
     );
+    navigate('/')
   };
   return (
     <div>
@@ -42,7 +44,7 @@ function BranchUserLayout() {
           <div className="h-full flex items-center justify-center ">
            <div className="flex text-white items-center relative">
            <button className="flex justify-center items-center" onClick={()=>setOpen(!open)}> <Profile/> <div>Faysal</div></button>
-           <div className={`absolute bg-black-100  px-4 py-4 text-black-500 rounded-lg top-12 ${open?'block':'hidden'}`}>
+           <div className={`absolute bg-black-100  px-4 py-4 text-black-500 rounded-lg top-12 z-50 ${open?'block':'hidden'}`}>
             <Link>Profile</Link>
             <button onClick={()=>{
               handleLogOut()

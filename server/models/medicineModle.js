@@ -3,11 +3,9 @@ const { default: mongoose, Schema } = require("mongoose");
 const medicineSchema = new mongoose.Schema({
     name:{
         type:String,
-        //unique:true
     },
     weight:{
-        type:String,
-        //required:true
+        type:String
     }
     ,
     unitPrice:{
@@ -15,12 +13,9 @@ const medicineSchema = new mongoose.Schema({
         required:true
     },
     dosages:{
-        type:String,
-       // required:true
-    },
+        type:String,},
     generics:{
-        type:String,
-        //required:true 
+        type:String, 
     },
     company:{
         type:Schema.Types.ObjectId,

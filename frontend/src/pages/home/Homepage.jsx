@@ -10,10 +10,10 @@ const Homepage = () => {
         <div className="grid grid-cols-2 ">
           <div className="absolute top-[14rem] left-24">
             <h1 className="text-4xl text-blue-900 not-italic text-center py-4  uppercase">
-             Best Pharmachy in The Country
+             BRK Medicine Shop
             </h1>
             <p className="text-3xl text-green-900 not-italic  py-4  uppercase">
-              Take Service from ours!!!!
+              Take Service from us!!!!
             </p>
 
             <div className="grid grid-cols-3 mt-4   gap-4 ">

@@ -38,7 +38,9 @@ function CashMemo() {
     <div>
       <ReactToPrint
       trigger={()=>{
-        return <button>Print</button>
+        return <div className='btnDiv justify-center'>
+           <button className='button'>Print</button>
+        </div>
       }}
       content={()=>componentRef.current}
       documentTitle='New Document'

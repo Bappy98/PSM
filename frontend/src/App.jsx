@@ -1,32 +1,32 @@
-import RequireAuth from '@/components/RequireAuth'
-import { ROLES } from '@/data/data'
-import BranchUserLayout from '@/layouts/branch/BranchUserLayout'
-import Layout from '@/layouts/dashboard/Layout'
-import UserLayout from '@/layouts/user/UserLayout'
-import Login from '@/pages/auth/Login'
-import CompanyList from '@/pages/company/CompanyList'
-import React, { lazy } from 'react'
-const Homepage = lazy(()=>import('./pages/home/Homepage'))
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-const Dashboard = lazy(()=>import('./pages/admin/dashboard/Dashboard'))
-const MedicineRequest = lazy(()=>import('./pages/admin/medicineReq'))
-const Stock = lazy(()=>import('./pages/admin/stock'))
-const User = lazy(()=>import('./pages/admin/users'))
-const BranchList = lazy(()=>import('./pages/branch/BranchList'))
-const Checkout = lazy(()=>import('./pages/BranchPages/checkout'))
-const BranchHome = lazy(()=>import('./pages/BranchPages/home'))
-const Sell = lazy(()=>import('./pages/BranchPages/sell'))
-const BranchStore = lazy(()=>import('./pages/BranchPages/store'))
-const BranchRegister = lazy(()=>import('./pages/branchRegister'))
-const CashMemo = lazy(()=>import('./pages/cashMemo'))
-const CompanyCreate = lazy(()=>import('./pages/company'))
-const BranchCreate = lazy(()=>import('./pages/CreateBranch'))
-const MedicineCreate = lazy(()=>import('./pages/medicine/'))
-const MedicineList = lazy(()=>import('./pages/medicine/MedicineList'))
+import RequireAuth from "@/components/RequireAuth"
+import { ROLES } from "@/data/data"
+import BranchUserLayout from "@/layouts/branch/BranchUserLayout"
+import Layout from "@/layouts/dashboard/Layout"
+import UserLayout from "@/layouts/user/UserLayout"
+import Dashboard from "@/pages/admin/dashboard/Dashboard"
+import MedicineRequest from "@/pages/admin/medicineReq"
+import Stock from "@/pages/admin/stock"
+import Users from "@/pages/admin/users"
+import Login from "@/pages/auth/Login"
+import BranchList from "@/pages/branch/BranchList"
+import Checkout from "@/pages/BranchPages/checkout"
+import BranchHome from "@/pages/BranchPages/home"
+import Sell from "@/pages/BranchPages/sell"
+import BranchStore from "@/pages/BranchPages/store"
+import BranchRegister from "@/pages/branchRegister"
+import CashMemo from "@/pages/cashMemo"
+import CompanyCreate from "@/pages/company"
+import CompanyList from "@/pages/company/CompanyList"
+import BranchCreate from "@/pages/CreateBranch"
+import Homepage from "@/pages/home/Homepage"
+import MedicineCreate from "@/pages/medicine"
+import MedicineList from "@/pages/medicine/MedicineList"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+
 
 function App() {
   return (
-   <>
+   <div className="font-sans">
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<UserLayout/>}>
@@ -62,11 +62,11 @@ function App() {
       <Route path='/medicine-list' element={<MedicineList/>}/>
       <Route path='/branches' element={<BranchList/>}/>
       <Route path='/medicine-req' element={<MedicineRequest/>}/>
-      <Route path='/users' element={<User/>}/>
+      <Route path='/users' element={<Users/>}/>
       </Route>
     </Routes>
     </BrowserRouter>
-   </>
+   </div>
   )
 }
 
