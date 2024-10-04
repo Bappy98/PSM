@@ -52,10 +52,7 @@ const getAllBranch = asyncHandler(async (req, res) => {
       path: 'user_id',
       select: 'name email' // Specify the fields you want to populate
     });
-    res.status(200).json({
-      message: "A list of all Branch",
-      data: branch,
-    });
+    res.status(200).json(branch);
   } catch (error) {
     res
       .status(500)

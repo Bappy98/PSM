@@ -51,7 +51,12 @@ const orderStock = asyncHandler(async(req,res)=>{
     try {
         const admin = await User.findOne({userType:'superadmin'})
         console.log(admin._id);
-        const stock = await Stock.find({user:admin._id})
+        const stock = await Stock.find({user:admin._id}).populate({
+            path: 'medicine',
+            populate: {
+                path: 'company', // Nested populate to get the company details
+            },
+        });
         res.status(200).json(stock)
         
         

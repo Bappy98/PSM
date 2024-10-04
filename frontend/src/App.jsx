@@ -36,7 +36,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>} />
-        <Route path="*" element={<Homepage />} />
+        <Route path="*" element={<Home />} />
       </Route>
       <Route path='/' element={<BranchUserLayout/>}>
       <Route

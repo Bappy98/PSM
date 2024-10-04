@@ -11,7 +11,7 @@ export const branchApi = apiSlice.injectEndpoints({
       }),
       branchList: builder.query({
         query: () => ({
-          url: "/company",
+          url: "/branch",
           method: "GET",
         }),
       }),
