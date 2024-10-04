@@ -1,3 +1,4 @@
+
 import RequireAuth from "@/components/RequireAuth"
 import { ROLES } from "@/data/data"
 import BranchUserLayout from "@/layouts/branch/BranchUserLayout"
@@ -8,6 +9,7 @@ import MedicineRequest from "@/pages/admin/medicineReq"
 import Stock from "@/pages/admin/stock"
 import Users from "@/pages/admin/users"
 import Login from "@/pages/auth/Login"
+import Register from "@/pages/auth/Register"
 import BranchList from "@/pages/branch/BranchList"
 import Checkout from "@/pages/BranchPages/checkout"
 import BranchHome from "@/pages/BranchPages/home"
@@ -21,6 +23,7 @@ import BranchCreate from "@/pages/CreateBranch"
 import Homepage from "@/pages/home/Homepage"
 import MedicineCreate from "@/pages/medicine"
 import MedicineList from "@/pages/medicine/MedicineList"
+import Home from "@/pages/user/home"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 
@@ -30,8 +33,9 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<UserLayout/>}>
-        <Route path='/' element={<Homepage/>}/>
+        <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>} />
         <Route path="*" element={<Homepage />} />
       </Route>
       <Route path='/' element={<BranchUserLayout/>}>

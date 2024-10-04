@@ -6,9 +6,9 @@ import Medicine from '../../../components/BranchHome/Medicine'
 function BranchHome() {
   return (
     <div className='bg-[#caebf8] min-h-screen'>
-        <Help/>
+        {/* <Help/>
         <Type/>
-        <Medicine/>
+        <Medicine/> */}
         
     </div>
   )

@@ -26,7 +26,7 @@ export const medicineType = [
         image:injection
     },
     {
-        name:"Implants or patches",
+        name:"Implants",
         image:implants
     },
 ]

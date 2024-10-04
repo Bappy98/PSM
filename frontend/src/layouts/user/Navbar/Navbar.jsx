@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <header className="top-0 fixed w-full z-99">
-      <div className="px-4 lg:px-16 py-6 bg-gray-800 rounded ">
+      <div className="px-4 lg:px-16 py-6 bg-gray-400 rounded ">
         <nav className="flex justify-between items-center">
           <div className="text-white text-2xl">
             <Link to="/">
@@ -80,6 +80,13 @@ const Navbar = () => {
                 <li className="flex">
                   <button className="py-1 hover:scale-105 text-white font-semibold  px-4 border border-gray-400 rounded shadow">
                     Login
+                  </button>
+                </li>
+              </Link>
+              <Link to="/register">
+                <li className="flex">
+                  <button className="py-1 hover:scale-105 text-white font-semibold  px-4 border border-gray-400 rounded shadow">
+                    sign Up
                   </button>
                 </li>
               </Link>

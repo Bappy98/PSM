@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const User = require("./../models/userModel");
 const Branch = require("../models/branchModle");
+const Medicine = require("../models/medicineModle");
+const Stock = require("../models/stockModle");
 const createBranch = asyncHandler(async (req, res) => {
   const { name, address, phone, logo } = req.body;
   try {
@@ -17,12 +19,20 @@ const createBranch = asyncHandler(async (req, res) => {
         message: "Branch already exists for this user",
       });
     }
+    const medicine = await Medicine.find({})
+    const stockEntries = medicine.map((item)=>({
+      user:user._id,
+      medicine:item._id,
+      quantity: 0,
+    }))
+    await Stock.insertMany(stockEntries)
     const newBranch = new Branch({
       user_id: user.id,
       address,
       phone,
       logo,
     });
+
     const saveBranch = await newBranch.save();
     res.status(201).json({
       message: "Branch create successfully",

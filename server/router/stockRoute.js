@@ -1,6 +1,6 @@
 const express = require('express')
 const { protect, isSuperAdmin } = require('../middleware/auth')
-const { getStock, addStock } = require('../controllers/stockController')
+const { getStock, addStock, orderStock } = require('../controllers/stockController')
 const { requestMedicine, acceptMedicineRequest, getAllRequest, getRequestById,  } = require('../controllers/requestController')
 
 const router = express.Router()
@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.route('/stock/:userId').get(getStock)
 router.route('/stock/add/:userId/:id').post(protect,isSuperAdmin,addStock)
-
+router.route('/stock').get(orderStock)
 // Route to request medicine
 router.post('/medicine-request',protect, requestMedicine);
 

@@ -25,7 +25,7 @@ function BranchUserLayout() {
   };
   return (
     <div>
-      <div className="bg-[#7348c2]">
+      <div className="bg-[#a98ae2]">
         <div className="container mx-auto flex justify-between h-24 w-full">
           <div className="items-center flex h-full">
             <img src={logo} alt="" className="h-16 w-16" />
