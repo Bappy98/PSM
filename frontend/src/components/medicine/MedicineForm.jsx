@@ -10,7 +10,8 @@ import Button from "../Button/Button";
 import fetchWrapper from "../../util/fetchWrapper";
 import { useGetCompanyQuery } from "../../store/api/company/companyApiSlice";
 import Textarea from "../ui/Textarea";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useUpdateMedicineMutation } from "@/store/api/medicine/medicineApiSlice";
 
 const schema = yup
   .object({
@@ -24,7 +25,8 @@ const schema = yup
   })
   .required();
 
-function MedicineForm() {
+function MedicineForm({ initialData = null, isEdit = false }) {
+  const {id} = useParams()
   const {
     register,
     formState: { errors },
@@ -34,19 +36,28 @@ function MedicineForm() {
   } = useForm({
     mode: "all",
     resolver: yupResolver(schema),
+    defaultValues:initialData||{}
   });
-  const [base64Logo, setBase64Logo] = useState(null);
+  const [base64Logo, setBase64Logo] = useState(initialData?.image||null);
   const { data: company, error, loading } = useGetCompanyQuery();
   const [companyOptions, setCompanyOptions] = useState([]);
-  console.log(company);
   const navigate = useNavigate()
+  const [updateMedicine, { isLoading: isUpdating }] = useUpdateMedicineMutation()
   useEffect(() => {
     if (company) {
       setCompanyOptions(company.map((item) => item.name));
     }
   }, [company]);
 
-  //console.log(companyOptions);
+  useEffect(()=>{
+    if(initialData) {
+      reset({
+        ...initialData,
+        company:initialData.company.name,
+      })
+      setBase64Logo(initialData.image)
+    }
+  },[initialData,reset])
 
   const onSubmit = async (data) => {
     try {
@@ -54,14 +65,17 @@ function MedicineForm() {
         ...data,
         image: base64Logo,
       };
+      console.log(formData);
+      
 
-      console.log("Form Data:", formData);
+      if (isEdit&&id) {
+        await updateMedicine({ id, ...formData }).unwrap();
+      } else {
+        await fetchWrapper.post("/medicine/create", formData);
+      }
 
-      const res = await fetchWrapper.post("/medicine/create", formData);
-      navigate("/medicine-list")
-      //console.log("Response:", res);
-      reset()
-    
+      navigate("/medicine-list");
+      reset();
     } catch (error) {
       console.error("Error during form submission:", error);
     }
@@ -114,11 +128,10 @@ function MedicineForm() {
           />
           <TextInput
             label={"Generic"}
-            defaultValue={""}
             name="generic"
             register={register}
             error={errors.generic}
-            placeholder="Select Generic name"
+            placeholder="Generic name"
             className="max-w-96 w-full mt-2"
           />
           <TextInput

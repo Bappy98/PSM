@@ -1,7 +1,7 @@
-// pages/auth/Login.js
+// // pages/auth/Login.js
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,7 +9,7 @@ import TextInput from "../../components/ui/TextInput";
 import { useLoginMutation } from "../../store/api/auth/authApiSlice";
 import { setUser } from "../../store/api/auth/authSlice";
 import { getUser } from "./../../store/api/user/userSlice";
-import useRole from "@/hooks/useRole";
+import image from './../../assets/psm-home.jpg';
 
 const schema = yup.object({
   email: yup.string().email("Invalid email").required("Email is Required"),
@@ -19,8 +19,7 @@ const schema = yup.object({
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userType } = useRole();
-
+  
   const {
     register,
     formState: { errors },
@@ -35,12 +34,10 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const userData = await login(data).unwrap();
-      console.log(userData);
-      
       dispatch(setUser({
         accessToken: userData?.token,
         user_id: userData?._id,
-        userType:userData?.userType
+        userType: userData?.userType
       }));
       dispatch(getUser({ user_id: userData._id, userType: userData.userType }));
       localStorage.setItem("auth", JSON.stringify({
@@ -48,61 +45,79 @@ const Login = () => {
         user_id: userData._id,
         userType: userData.userType
       }));
+      
+      // Redirect to the appropriate page after login
+      navigate('/customerHome'); // Adjust this path as needed
     } catch (error) {
       console.error("Login error:", error);
     }
   };
 
-  useEffect(() => {
-    if (userType === "superadmin") {
-      navigate("/dashboard");
-    } else if (userType === "branch") {
-      navigate("/branch");
-    }
-  }, [navigate, userType]);
-
   return (
-    <div className="common-home-bac mt-[80px]">
-      <div className="flex justify-center items-center h-screen -top-24">
-        <div className="bg-blue-700 p-8 rounded-lg shadow-md w-full max-w-md">
-          <h2 className="text-2xl text-white font-bold text-center mb-4">
-            PSM Login
-          </h2>
-          <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
-            <div className="">
-              <div className="">
-                <TextInput
-                  name="email"
-                  label="email"
-                  type="text"
-                  defaultValue={"superadmin@gmail.com"}
-                  className="w-full px-6 rounded"
-                  placeholder="Enter your email"
-                  register={register}
-                  error={errors.email}
-                />
-              </div>
-              <div>
-                <TextInput
-                  name="password"
-                  label="password"
-                  type="password"
-                  className="w-full px-6 rounded"
-                  defaultValue="test123"
-                  placeholder="Enter your password"
-                  register={register}
-                  error={errors.password}
-                  autoComplete="current-password"
-                />
-              </div>
+    <div className="bg-[#9dc9e7] min-h-screen flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-4xl w-full flex flex-col md:flex-row">
+        {/* Image Section */}
+        <div className="hidden md:block md:w-1/2">
+          <img src={image} alt="Login Illustration" className="object-cover h-full w-full" />
+        </div>
+
+        {/* Form Section */}
+        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+          <div className="mb-6 text-center">
+            <h2 className="text-3xl font-bold">Login</h2>
+          </div>
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            {/* Email Input */}
+            <div>
+              <TextInput
+                name="email"
+                label="Email"
+                type="email"
+                defaultValue=""
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your email"
+                register={register}
+                error={errors.email}
+              />
             </div>
-            <button
-              type="submit"
-              className="w-full bg-blue-900 text-white rounded-md mt-4 hover:text-blue-900 py-2 hover:bg-blue-50 transition duration-300"
-            >
-              Login
-            </button>
+
+            {/* Password Input */}
+            <div>
+              <TextInput
+                name="password"
+                label="Password"
+                type="password"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                defaultValue=""
+                placeholder="Enter your password"
+                register={register}
+                error={errors.password}
+                autoComplete="current-password"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div>
+              <button
+                type="submit"
+                className="w-full bg-blue-600 text-white rounded-md py-2 hover:bg-blue-700 transition duration-300"
+                disabled={isLoading}
+              >
+                {isLoading ? "Logging in..." : "Login"}
+              </button>
+            </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="text-red-500 text-center">
+                {error.data?.message || "Login failed. Please try again."}
+              </div>
+            )}
           </form>
+          <div className="flex justify-between mt-2">
+          <div className="text-lg">Don't have an account?</div>
+          <div onClick={()=>navigate('/register')} className="font-semibold text-lg cursor-pointer">Register</div>
+          </div>
         </div>
       </div>
     </div>

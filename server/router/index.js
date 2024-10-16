@@ -6,6 +6,7 @@ const Dosages = require("./dosageRoute");
 const Medicine = require("./medicineRoute");
 const Stock = require("./stockRoute");
 const Sell = require("./sellRoute");
+const Order = require("./orderRoute")
 module.exports = [
   Auth,
   Branch,
@@ -15,4 +16,5 @@ module.exports = [
   Medicine,
   Stock,
   Sell,
+  Order
 ];

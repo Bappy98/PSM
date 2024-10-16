@@ -46,7 +46,7 @@ function CashMemo() {
       documentTitle='New Document'
       />
       <div className='mx-32' ref={componentRef}>
-        <div className='text-center text-2xl font-bold'>Brk Medicine Shope</div>
+        <div className='text-center text-2xl font-bold'>BRK Medicine Shop</div>
         <div className='text-center text-xl'>Trishal Branch</div>
         <div className='text-xl uppercase'>Customer : {customer}</div>
         <CashTable data={medicines} column={COLUMN}/>

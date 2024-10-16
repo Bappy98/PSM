@@ -13,6 +13,6 @@ router.route("/login").post(login);
 router.route("/branch/register").post(branchRegistration);
 
 router.route("/users").get(protect,isSuperAdmin,getAllUsers);
-router.route("/user/:id").get(userById).delete(protect,isSuperAdmin,deleteUser);
+router.route("/user/:id").get(userById).get(protect,deleteUser);
 
 module.exports = router;

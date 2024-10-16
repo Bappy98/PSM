@@ -5,16 +5,10 @@ export const navLinks = [
   
   },
   {
-    to: "/About",
-    text: "About",
+    to: '/medicine',
+    text: "Medicine",
    
   
-  },
-  {
-    to: "/Branch",
-    text: "Branches",
-  
-
   },
   { to: "/contact", text: "Contact" },
 ];

@@ -1,17 +1,11 @@
-//import React from 'react'
 
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getAllBranch } from "../../store/api/branch/branchSlice"
 import DataGrid from "@/components/shared/dataTable/DataGrid"
 import Button from "@/components/Button/Button"
+import Loading from "@/components/shared/Loading"
+import { useBranchListQuery } from "@/store/api/branch/branchApi"
 
 function BranchList() {
-  const dispatch = useDispatch()
-  const {branch} = useSelector((state)=> state.branch)
-  useEffect(()=>{
-    dispatch(getAllBranch())
-  },[dispatch])
+  const {data} = useBranchListQuery()
   const COLUMN = [
     {
       Header: "No.",
@@ -30,11 +24,14 @@ function BranchList() {
       accessor:row => row.phone
     },
   ]
+  if(!data) {
+    return <Loading/>
+  }
 
   return (
     <div>
       <Button link={'/branch-create'}>Add Branch Info</Button>
-      <DataGrid data={branch} column={COLUMN}/>
+      <DataGrid data={data} column={COLUMN}/>
     </div>
   )
 }

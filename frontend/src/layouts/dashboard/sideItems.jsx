@@ -50,5 +50,34 @@ export const sidebarItems = [
       dropdown: false,
       linkto:"/medicine-list"
     },
+    {
+      icon: <VaccinesIcon />,
+      label: "Order",
+      dropdown: false,
+      linkto:"/order-list"
+    },
     // Add more items as needed
   ];
+
+  export const BranchItem = [
+    
+      {
+        icon: <DashboardIcon />,
+        label: "Dashboard",
+        dropdown:false,
+        linkto:"/branch"
+      },
+      {
+        icon: <DashboardIcon />,
+        label: "Store",
+        dropdown:false,
+        linkto:"/branchStore"
+      },
+      {
+        icon: <DashboardIcon />,
+        label: "Sell",
+        dropdown:false,
+        linkto:"/sell"
+      },
+    
+  ]

@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.route("/branch/create").post(protect, isSuperAdmin, createBranch);
 
-router.route("/branch").get( getAllBranch);
+router.route("/branch").get(getAllBranch);
 router
   .route("/branch/:id")
   .put(protect, updateBranch)

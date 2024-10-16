@@ -13,8 +13,9 @@ import {
 import avatarIcon from "../../assets/BRKK.svg";
 import { Link } from "react-router-dom";
 import { Notifications } from "@mui/icons-material";
-import { logOut } from "../../store/api/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { logOut, selectCurrentUser } from "../../store/api/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "@/store/api/user/userSlice";
 
 const Topbar = ({ sidebarCollapsed }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -22,6 +23,15 @@ const Topbar = ({ sidebarCollapsed }) => {
   const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const userId = useSelector(selectCurrentUser)
+  const { user, loading, error } = useSelector((state) => state.user);
+ // console.log(user);
+  
+  React.useEffect(()=>{
+    if(userId) {
+      dispatch(getUser({user_id:userId}))
+    }
+  },[dispatch,userId])
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -62,7 +72,7 @@ const Topbar = ({ sidebarCollapsed }) => {
             <Avatar src="/path/to/avatar.jpg" alt="User Avatar" />
             <Box sx={{ flexGrow: 1, ml: 1 }}>
               <Typography style={{ fontSize: "0.875rem", color: "black" }}>
-                faysal ahmed
+                {user?.name}
               </Typography>
             </Box>
           </IconButton>

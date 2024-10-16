@@ -1,39 +1,29 @@
-import { useGetMedicineForOrderQuery } from '@/store/api/userOrder/userOrderApiSlice'
+import MedicineCard from '@/components/card/MedicineCard';
+import { addItem } from '@/store/api/myProduct/myProductSlice';
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-function AllMedicine() {
-    const {data} = useGetMedicineForOrderQuery()
-    console.log(data);
-    if(!data) {
-        return <div>loading ...</div>
+function AllMedicine({data}) {
+    const dispatch = useDispatch();
+    const handleAddToCart = (item) => {
+      
+      dispatch(addItem(item));
     }
   return (
-    <div>
-        <div>Medicine</div>
+    <div className='my-12'>
+        <div className='text-2xl mx-12 my-8 text-center md:text-start md:flex md:justify-between font-bold'>
+            <div>Medicine</div>
+            <Link className='hidden md:block'>See all</Link>
+        </div>
         <div className='flex flex-wrap gap-5 justify-evenly mx-auto items-center'>{
-        data.slice(0,6).map((item, i) => ( // Access  the nested data array
-                        <div key={i} className='border-2 w-60 p-4 shadow-2xl'>
-                            <div className='h-32 w-52'>
-                                <img src={item.medicine.image} alt="" className='h-full w-full object-contain' />
-                            </div>
-                            <div className='flex items-center justify-between'>
-                                <div>
-                                    <div>{item.medicine.name} {item.medicine.dosages}</div>
-                                    <div>{item.medicine.type}</div>
-                                    <div>Price:{item.medicine.unitPrice}</div>
-                                    <div>Stock: {item.quantity}</div>
-                                </div>
-                                    <div className='h-8 w-8'>
-                                        <img src={item.medicine.company.logo} alt="" className='h-full w-full' />
-                                    </div>
-                            </div>
-                           <div className='flex justify-between'>
-                           <button className='bg-orange-300 px-2 text-sm'>Add to card</button>
-                           <div className='bg-orange-300 px-2 text-sm cursor-pointer'>Red more</div>
-                           </div>
-                        </div>
+        data?.slice(0,6).map((item, i) => ( // Access  the nested data array
+                        <MedicineCard item={item}
+                        key={item.id}
+                        onAddToCart={handleAddToCart}/>
                     ))}
         </div>
+        <Link className='text-center my-4 block md:hidden bg-blue-500 rounded-lg mx-12'>See all</Link>
     </div>
   )
 }

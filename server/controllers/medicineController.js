@@ -2,16 +2,14 @@ const asyncHandler = require("express-async-handler");
 const Medicine = require("./../models/medicineModle");
 const Dosages = require("../models/dosagesModel");
 const Company = require("../models/companyModel");
-const Generics = require("../models/genericsModel");
 const User = require("../models/userModel");
 const Stock = require("../models/stockModle");
 const cerateMedicine = asyncHandler(async (req, res) => {
   const {
     name,
-    weight,
     unitPrice,
     dosages,
-    generics,
+    generic,
     company,
     type,
     description,
@@ -20,9 +18,11 @@ const cerateMedicine = asyncHandler(async (req, res) => {
   try {
     // const dosage = await Dosages.findOne({ name: dosages });
     const singleCompany = await Company.findOne({ name: company });
-    // const generic = await Generics.findOne({ name: generics });
+    // const generic = await generic.findOne({ name: generic });
 
     const existingMedicine = await Medicine.findOne({ name: name });
+    console.log(generic);
+    
     if (existingMedicine) {
       return res.status(400).json({
         message: "Medicine already exists for this name",
@@ -31,10 +31,9 @@ const cerateMedicine = asyncHandler(async (req, res) => {
     if (singleCompany) {
       const newMedicine = new Medicine({
         name,
-        weight,
         unitPrice,
         dosages,
-        generics,
+        generic,
         company: singleCompany._id,
         description,
         type,
@@ -82,18 +81,21 @@ const getAllMedicine = asyncHandler(async (req, res) => {
 
 const findById = asyncHandler(async (req, res) => {
   try {
-    const singleMedicine = await Medicine.findById(req.params.id);
+    const { id } = req.params;
+    const singleMedicine = await Medicine.findById(id).populate('company'); // Populate if needed
+
     if (!singleMedicine) {
-      res.status(404).json({
+      return res.status(404).json({
         message: "Medicine not found",
       });
-    } else {
-      res.json(singleMedicine);
     }
+
+    res.status(200).json(singleMedicine);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error finding medicine", error: error.message });
+    res.status(500).json({ 
+      message: "Error finding medicine", 
+      error: error.message 
+    });
   }
 });
 
@@ -104,7 +106,7 @@ const updateMedicine = asyncHandler(async (req, res) => {
       weight,
       unitPrice,
       dosages,
-      generics,
+      generic,
       company,
       type,
       description,
@@ -123,7 +125,7 @@ const updateMedicine = asyncHandler(async (req, res) => {
     medicine.unitPrice = unitPrice || medicine.unitPrice;
     medicine.type = type || medicine.type;
     medicine.dosages = dosages || medicine.dosages;
-    medicine.generics = generics || medicine.generics;
+    medicine.generic = generic || medicine.generic;
     medicine.company = company || medicine.company;
     medicine.description = description || medicine.description;
     const saveData = await medicine.save();

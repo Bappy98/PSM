@@ -1,108 +1,45 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Sidebar from "../sidebar/Sidbar";
+import React from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { navLinks } from "./navlink";
 import logo from "./../../../assets/BRKK.svg";
+import { useSelector } from "react-redux";
+import { Icon } from "@iconify/react";
 
 const Navbar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState(null);
-
-  const toggleSidebar = () => {
-    setShowSidebar(!showSidebar);
-  };
-
-  const closeSidebar = () => {
-    setShowSidebar(false);
-  };
-
-  const handleLinkMouseEnter = (index) => {
-    setHoveredLink(index);
-  };
-
-  const handleLinkMouseLeave = () => {
-    setHoveredLink(null);
-  };
+  const location = useLocation();
+  const { cartItems } = useSelector((state) => state.myProduct);
+  const navigate = useNavigate()
 
   return (
-    <header className="top-0 fixed w-full z-99">
-      <div className="px-4 lg:px-16 py-6 bg-gray-400 rounded ">
-        <nav className="flex justify-between items-center">
-          <div className="text-white text-2xl">
-            <Link to="/">
-              <img src={logo} className="h-16 w-16 z-30" alt="logo" />
-            </Link>
-          </div>
-          <div className="">
-            <ul className="flex justify-between space-x-6 text-sm text-white font-bold ">
-              {navLinks.map((link, index) => (
-                <li
-                  className={`hidden lg:block ${
-                    link.showDropdown && hoveredLink === index ? "group" : ""
-                  }`}
-                  key={index}
-                  onMouseEnter={() => handleLinkMouseEnter(index)}
-                  onMouseLeave={handleLinkMouseLeave}
-                >
-                  {link.showDropdown ? (
-                    <span className="cursor-not-allowed">
-                      {link.text}
-                      <i className="fa-solid fa-chevron-down ml-1 text-xs"></i>
-                    </span>
-                  ) : (
-                    <Link
-                      to={link.to}
-                      className="nav-link hover:border-b-2 hover:text-gray-400 border-b border-transparent transition duration-200 ease-in-out hover:border-white pb-1"
-                    >
-                      {link.text}
-                    </Link>
-                  )}
-                  {link.showDropdown && hoveredLink === index && (
-                    <div className="absolute bg-gray-900 text-white mt-2 p-2 rounded-lg">
-                      {/* Dropdown content */}
-                      <ul>
-                        {link.dropdownLinks.map((dropdownLink, subIndex) => (
-                          <li
-                            key={subIndex}
-                            className="my-4 hover:text-gray-500 p-2"
-                          >
-                            <Link to={dropdownLink.to}>
-                              {dropdownLink.text}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </li>
-              ))}
-              <Link to="/login">
-                <li className="flex">
-                  <button className="py-1 hover:scale-105 text-white font-semibold  px-4 border border-gray-400 rounded shadow">
-                    Login
-                  </button>
-                </li>
-              </Link>
-              <Link to="/register">
-                <li className="flex">
-                  <button className="py-1 hover:scale-105 text-white font-semibold  px-4 border border-gray-400 rounded shadow">
-                    sign Up
-                  </button>
-                </li>
-              </Link>
-              <li
-                className="text-green-500 block lg:hidden"
-                onClick={toggleSidebar}
-              >
-                menu
-              </li>
-            </ul>
-          </div>
-        </nav>
-        {/* mobile menu Sidebar */}
-        <Sidebar showSidebar={showSidebar} closeSidebar={closeSidebar} />
+    <nav className="bg-blue-200">
+      <header className="h-24  flex justify-items-center items-center justify-between container mx-auto">
+      <div className="">
+        <img src={logo} alt="Logo" className="h-16 w-16" />
+      </div>
+      <div>
+        {navLinks.map((item, i) => (
+          <Link
+            key={i}
+            className={`bg-black-400 px-4 py-2 mx-2 rounded-lg hover:bg-blue-600 hover:text-white ${
+              location.pathname === item.to ? "text-white bg-black-500" : ""
+            }`}
+            to={item.to}
+          >
+            {item.text}
+          </Link>
+        ))}
+      </div>
+      <div className="flex items-center ">
+      <button onClick={()=>navigate('/product')} className='relative'>
+             <div  className='absolute text-xl -top-4 left-2' >{cartItems?.length}</div>
+             <Icon className='h-8 w-8 mx-4' icon={'heroicons:shopping-cart'}/>
+      </button>
+      <Link to={'/login'} className="bg-black-400 px-4 py-2 mx-2 rounded-lg hover:bg-blue-600 hover:text-white">
+        logIn
+      </Link>
       </div>
     </header>
+    </nav>
   );
 };
 

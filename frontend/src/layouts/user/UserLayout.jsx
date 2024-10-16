@@ -8,13 +8,31 @@ import { selectCurrentToken, selectCurrentUserType } from "@/store/api/auth/auth
 const UserLayout = () => {
 const token = useSelector(selectCurrentToken)
 const role = useSelector(selectCurrentUserType)
-const route = role==='branch'?'branch':'dashboard'
+let route;
+  switch (role) {
+    case 'superadmin':
+      route = 'dashboard';
+      break;
+    case 'branch':
+      route = 'branch';
+      break;
+    case 'user':
+      route = 'customerHome'
+      break;
+    default:
+      route = '/';
+      break;
+  }
 
   return (
-    <div>
+    <div className="z-[100]">
     <Navbar/>
+    <div className="min-h-screen">
     {token? <Navigate to={`/${route}`} replace/> : <Outlet/>}
-  
+    </div>
+
+    <footer className="h-44 bg-black-800 z-50">
+    </footer>
     </div>
   );
 };

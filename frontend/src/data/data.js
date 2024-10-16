@@ -19,6 +19,22 @@ export const branchNav = [
     },
 ]
 
+export const customerNav = [
+    {
+        name:'Home',
+        link:'/customerHome'
+    },
+    {
+        name:'Medicine',
+        link:'/allMedicine'
+    },
+    {
+        name:"My Order",
+        link:"/order-status"
+    }
+    
+]
+
 export const ProfileNav = [
     { label: "Profile", link: "/profile" },
     { label: "Logout", link: "/" },
@@ -26,5 +42,6 @@ export const ProfileNav = [
 
   export const ROLES = {
     SUPER_ADMIN:'superadmin',
-    BRANCH:'branch'
+    BRANCH:'branch',
+    USER:'user'
   }

@@ -7,9 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 function ProductSell({ data, setOpen }) {
   const userId = useSelector(selectCurrentUser);
   const [addMedicine, setAddMedicine] = useState([]);
-  // const [sellData,setSellData] = useState(null)
   const navigate = useNavigate();
-  console.log("selldata", data);
+  
 
   useEffect(() => {
     const result = data.map((cur) => ({
@@ -22,8 +21,6 @@ function ProductSell({ data, setOpen }) {
     }));
     setAddMedicine(result);
   }, [data]);
-
-  console.log("result", addMedicine);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -40,15 +37,12 @@ function ProductSell({ data, setOpen }) {
     e.preventDefault();
 
     const sellData = {
-      userId, // The user requesting the medicines
-      medicines: addMedicine, // The list of medicines and their quantities
+      userId, 
+      medicines: addMedicine, 
     };
-    //setSellData(sellData)
+    
     navigate("/checkout", { state: sellData });
   };
-
-  //console.log(addMedicine);
-
   return (
     <div>
       <div className="min-h-screen w-full bg-blue-500 opacity-30 absolute inset-0"></div>

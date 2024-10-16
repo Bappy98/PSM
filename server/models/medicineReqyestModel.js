@@ -19,6 +19,15 @@ const medicineRequestSchema = new mongoose.Schema({
             }
         }
     ],
+    address:{
+        type:String,
+    },
+    invoice:{
+        type:String,
+    },
+    phone:{
+        type:String,
+    },
     status: {
         type: String,
         enum: ['pending', 'accepted', 'rejected'],

@@ -5,8 +5,8 @@ const {
   getAllMedicine,
   updateMedicine,
   deleteMedicine,
+  findById,
 } = require("../controllers/medicineController");
-const { findById } = require("../models/medicineModle");
 
 const router = express.Router();
 

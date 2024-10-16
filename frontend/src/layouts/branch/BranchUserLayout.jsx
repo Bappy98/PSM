@@ -3,10 +3,9 @@ import { branchNav, ProfileNav } from "../../data/data";
 import { logo } from "../../assets";
 import * as React from "react";
 import Profile from "../../components/shared/Profile";
-import DropDown from "../../components/ui/Dropdown";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { logOut, selectCurrentToken, selectCurrentUserType } from "../../store/api/auth/authSlice";
+import { logOut, selectCurrentToken, selectCurrentUser, selectCurrentUserType } from "../../store/api/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "@/store/api/user/userSlice";
 
 function BranchUserLayout() {
   const [open,setOpen] = React.useState(false)
@@ -23,6 +22,15 @@ function BranchUserLayout() {
     );
     navigate('/')
   };
+  const userId = useSelector(selectCurrentUser)
+  const { user, loading, error } = useSelector((state) => state.user);
+ // console.log(user);
+  
+  React.useEffect(()=>{
+    if(userId) {
+      dispatch(getUser({user_id:userId}))
+    }
+  },[dispatch,userId])
   return (
     <div>
       <div className="bg-[#a98ae2]">
@@ -43,7 +51,7 @@ function BranchUserLayout() {
           </div>
           <div className="h-full flex items-center justify-center ">
            <div className="flex text-white items-center relative">
-           <button className="flex justify-center items-center" onClick={()=>setOpen(!open)}> <Profile/> <div>Faysal</div></button>
+           <button className="flex justify-center items-center" onClick={()=>setOpen(!open)}> <Profile/> <div>{user?.name}</div></button>
            <div className={`absolute bg-black-100  px-4 py-4 text-black-500 rounded-lg top-12 z-50 ${open?'block':'hidden'}`}>
             <Link>Profile</Link>
             <button onClick={()=>{

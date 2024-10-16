@@ -1,4 +1,5 @@
 import DataGrid from '@/components/shared/dataTable/DataGrid';
+import Loading from '@/components/shared/Loading';
 import TextInput from '@/components/ui/TextInput';
 import { selectCurrentUser } from '@/store/api/auth/authSlice';
 import { getStock } from '@/store/api/stock/stockSlice';
@@ -16,12 +17,12 @@ function Stock() {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(null);
   const userId = useSelector(selectCurrentUser); 
-  const { stock } = useSelector((state) => state.stock);
+  const { stock,loading} = useSelector((state) => state.stock);
   const {register,formState:{errors},handleSubmit,reset} = useForm({
     mode:'all',
     resolver:yupResolver(schema)
   })
-  //console.log(isModalOpen);
+  
   
 
   useEffect(() => {
@@ -77,7 +78,10 @@ function Stock() {
       
     }
   }
-  
+  if(loading) {
+    return <Loading/>
+  }
+
 
   return (
     <div className='relative'>

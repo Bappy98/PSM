@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Button from "@/components/Button/Button";
 import DataGrid from "@/components/shared/dataTable/DataGrid";
+import Loading from "@/components/shared/Loading";
 
 function CompanyList() {
   const [list, setList] = useState([]);
@@ -42,7 +43,9 @@ function CompanyList() {
     },
   ];
 
-  
+  if(!data) {
+    return <Loading/>
+  }
 
   return (
     <>

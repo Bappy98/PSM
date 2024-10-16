@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Collapse,
@@ -8,19 +8,30 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { sidebarItems as items } from "./sideItems";
+import { sidebarItems,BranchItem } from "./sideItems";
 import { ExpandLess, ExpandMore, Menu as MenuIcon } from "@mui/icons-material";
+import { useSelector } from "react-redux";
+import { selectCurrentUserType } from "@/store/api/auth/authSlice";
 
 const Sidebar = ({ onCollapseChange }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [openDropdowns, setOpenDropdowns] = useState({});
+  const [items,setItems] = useState([])
 
+  const userType = useSelector(selectCurrentUserType)
+  useEffect(()=>{
+    if(userType==='branch') {
+      setItems(BranchItem)
+    }
+    else if(userType ==='superadmin') {
+      setItems(sidebarItems)
+    }
+  },[items,userType])
+  
   const toggleCollapse = () => {
     const newState = !collapsed;
     setCollapsed(newState);
     onCollapseChange && onCollapseChange(newState);
-
-    // When collapsing, close all dropdowns
     if (newState) {
       setOpenDropdowns({});
     }
@@ -53,12 +64,7 @@ const Sidebar = ({ onCollapseChange }) => {
             <MenuIcon />
           </ListItemIcon>
 
-          {!collapsed && (
-            <ListItemText
-              className="bg-green-900 text-white text-center rounded py-1  font-extrabold uppercase"
-              primary="PSM"
-            />
-          )}
+         
         </ListItem>
 
         {items.map((item, index) => (
