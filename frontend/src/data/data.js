@@ -30,7 +30,7 @@ export const customerNav = [
     },
     {
         name:"My Order",
-        link:"/order-status"
+        link:"/my-order"
     }
     
 ]

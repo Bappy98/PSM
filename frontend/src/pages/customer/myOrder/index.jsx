@@ -11,13 +11,15 @@ import { useNavigate } from "react-router-dom";
 function MyOrder() {
   const dispatch = useDispatch();
   const { myOrder } = useSelector((state) => state.myOrder);
+  console.log(myOrder);
+  
   const userId = useSelector(selectCurrentUser);
   const navigate = useNavigate()
   const OrderSort = myOrder?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   const singleOrder = async ( id ) => {
     try {
-      const  {data}  = await fetchWrapper.get(`/order/${id}`);
-      navigate('/single-order',{ state: { data } })
+      const  {data}  = await fetchWrapper.get(`/order/${id}`);    
+      navigate('/single-order',{ state:  {data}  })
       
     } catch (error) {}
   };
@@ -58,7 +60,7 @@ function MyOrder() {
         return (
           <button
             className="z-50"
-            onClick={() => singleOrder(row.original._id)}
+             onClick={() => singleOrder(row.original._id)}
           >
             <Icon icon="heroicons-eye" />
           </button>

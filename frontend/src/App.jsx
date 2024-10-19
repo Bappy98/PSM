@@ -93,7 +93,7 @@ function App() {
         
         <Route path="/myProduct" element={<Product/>}/>
         <Route path="/order-product" element={<OrderProduct/>}/>
-        <Route path='/order-status' element={<MyOrder/>}/>
+        <Route path='/my-order' element={<MyOrder/>}/>
         <Route path="/single-order" element={<SingleOrder/>} />
       </Route>
     </Routes>

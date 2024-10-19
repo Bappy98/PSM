@@ -14,12 +14,12 @@ function AcceptedOrderModal() {
     location.state.data;
   const userId = useSelector(selectCurrentUser)
   const handleStatus = async (requestId, status) =>{
-   const data = {
+   const info = {
     status,
     userId
    }
    try {
-    const res = await fetchWrapper.post(`/accepted-order/${requestId}`,data)
+    const res = await fetchWrapper.post(`/accepted-order/${requestId}`,info)
 
     if(res) {
       setLode(true)
@@ -38,7 +38,7 @@ useEffect(()=>{
   
   return (
    <div className="bg-blue-300">
-    <SingleOrder state={data}/>
+    <SingleOrder/>
     <div>
     <div className="flex justify-center px-4">
       <div>{status}</div>

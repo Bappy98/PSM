@@ -1,9 +1,15 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-function SingleOrder({data}) {
+function SingleOrder() {
+  //console.log(data);
+  
   const location = useLocation();
-  console.log(location.state);
+  //console.log(location.state);
+  console.log(location);
+  
+ 
+  
   const { address, invoice, medicines, phone, total, status,user } =
     location.state.data;
   return (
