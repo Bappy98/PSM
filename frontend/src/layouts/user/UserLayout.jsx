@@ -30,9 +30,6 @@ let route;
     <div className="min-h-screen">
     {token? <Navigate to={`/${route}`} replace/> : <Outlet/>}
     </div>
-
-    <footer className="h-44 bg-black-800 z-50">
-    </footer>
     </div>
   );
 };

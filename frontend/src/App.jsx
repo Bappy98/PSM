@@ -29,6 +29,7 @@ import OrderProduct from "@/pages/customer/orderProduct"
 import MedicineCreate from "@/pages/medicine"
 import MedicineEdit from "@/pages/medicine/MedicineEdit"
 import MedicineList from "@/pages/medicine/MedicineList"
+import Payment from "@/pages/payment"
 import AllMedicine from "@/pages/public/medicine"
 import Home from "@/pages/user/home"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
@@ -45,6 +46,7 @@ function App() {
         <Route path='/register' element={<Register/>} />
         <Route path='/medicine' element={<AllMedicine/>}/>
         <Route path="/product" element={<Product/>}/>
+        {/* <Route path="/contact" element={}/> */}
         <Route path="*" element={<Home />} />
       </Route>
       <Route path='/' element={<Layout/>}>
@@ -93,6 +95,7 @@ function App() {
         
         <Route path="/myProduct" element={<Product/>}/>
         <Route path="/order-product" element={<OrderProduct/>}/>
+        <Route path="/payment" element=<Payment/> />
         <Route path='/my-order' element={<MyOrder/>}/>
         <Route path="/single-order" element={<SingleOrder/>} />
       </Route>

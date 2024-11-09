@@ -35,7 +35,7 @@ function SingleOrder() {
         <p>Customer Name: <span className="uppercase">{user.name}</span></p>
         <p>Phone: {phone}</p>
         <p>Address: {address}</p>
-        <p>Payment Status:Cash On Delivery</p>
+        <p>Payment Status:Paid</p>
       </div>
     </div>
   );

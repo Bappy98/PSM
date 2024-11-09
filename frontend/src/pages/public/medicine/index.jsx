@@ -64,13 +64,15 @@ function AllMedicine() {
 
   return (
     <div className=" ">
-      <div className="flex items-center justify-center mt-8">
-      <input type="text" onChange={handleChange} className="border-4 rounded-md" />
+      <div className="flex items-center justify-evenly mt-8">
+     <div className="flex">
+     <input type="text" onChange={handleChange} className="border-4 rounded-md" />
      <div className="text-xl p-[5px] rounded-md  bg-gray-300">
      <Icon icon={'heroicons:magnifying-glass'}/>
      </div>
+     </div>
      <div>
-     <label for="Type">Type:</label>
+     <label for="Type" className="font-bold mx-4">Type:</label>
   <select value={type} onChange={(e)=>setType(e.target.value)}>
     {medicineType.map((item,i)=>(
       <option value={item.value}>{item.option}</option>
@@ -81,7 +83,7 @@ function AllMedicine() {
       </div>
       <div>
         <div className="text-2xl font-bold text-center my-1">All Medicine</div>
-        <div className="flex flex-wrap gap-5 justify-evenly mx-auto items-center">
+        <div className="grid gap-4 grid-cols-1 container mx-auto justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {data?.filter(item=>item.medicine.name?.toLowerCase().includes(name.toLowerCase())).
           filter(item=>item.medicine.type.includes(type)).map(
             (

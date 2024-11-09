@@ -7,6 +7,7 @@ import getAllRequest from "./api/request/requestSlice";
 import myProduct from "./api/myProduct/myProductSlice";
 import order from "./api/order/orderSlice";
 import myOrder from './api/myOrder/myOrderSlice'
+import SingleBranch from './api/singleBranch/singleBranchSlice'
 const rootReducer = {
   auth,
   user,
@@ -16,7 +17,8 @@ const rootReducer = {
   getAllRequest,
   myProduct,
   order,
-  myOrder
+  myOrder,
+  SingleBranch
 };
 
 export default rootReducer;

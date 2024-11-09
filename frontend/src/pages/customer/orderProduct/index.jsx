@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
+import {useStripe,useElements,CardElement} from '@stripe/react-stripe-js'
 import TextInput from '@/components/ui/TextInput'
 const schema = yup.object({
     address:yup.string().required().label("Address"),
@@ -67,8 +68,9 @@ function OrderProduct() {
         userId:user,
         total:grandTotal+100
       };
+      navigate('/payment',{state:orderInfo})
      try {
-      await fetchWrapper.post('/order',orderInfo)
+      //await fetchWrapper.post('/order',orderInfo)
      } catch (error) {
       
      }
@@ -113,7 +115,7 @@ function OrderProduct() {
             </span>
             </div>
           </div>
-    
+         
 
         <div className='btnDiv justify-end'>
           <button className='button'>Checkout</button>

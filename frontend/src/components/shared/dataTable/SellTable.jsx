@@ -81,7 +81,7 @@ function SellTable({ data, column,open,setOpen }) {
   return (
     <div className="relative">
      <div className="btnDiv justify-end">
-      <button className="relative flex items-center justify-center p-3 bg-blue-500 text-white rounded" onClick={()=>setOpen(true)}>Order</button>
+      <button className="relative flex items-center justify-center p-3 bg-blue-500 text-white rounded" onClick={()=>setOpen(true)}>Sell</button>
       </div>
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
       

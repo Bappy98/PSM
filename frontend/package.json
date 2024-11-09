@@ -18,6 +18,8 @@
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.20",
     "@reduxjs/toolkit": "^2.2.4",
+    "@stripe/react-stripe-js": "^2.8.1",
+    "@stripe/stripe-js": "^4.8.0",
     "axios": "^1.7.2",
     "cleave.js": "^1.6.0",
     "jwt-decode": "^4.0.0",

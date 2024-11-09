@@ -22,12 +22,12 @@ function MedicineCard({ item }) {
 
   return (
     <div>
-      <div className="border-2 w-60 p-4 shadow-2xl rounded-xl">
-        <div className="h-32 w-52">
+      <div className="border-2 min-w-[250px] p-4 shadow-2xl rounded-xl">
+        <div className="h-32 w-52 flex justify-center items-center justify-items-center mx-auto">
           <img
             src={item.medicine.image}
             alt=""
-            className="h-full w-full object-contain"
+            className="h-full w-full  object-contain"
           />
         </div>
         <div className="flex items-center justify-between">
@@ -62,9 +62,9 @@ function MedicineCard({ item }) {
         </button>
 
 
-          <div className="bg-orange-300 px-2 text-sm cursor-pointer">
+          {/* <div className="bg-orange-300 px-2 text-sm cursor-pointer">
             Red more
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

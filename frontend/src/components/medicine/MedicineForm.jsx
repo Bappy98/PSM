@@ -65,21 +65,25 @@ function MedicineForm({ initialData = null, isEdit = false }) {
         ...data,
         image: base64Logo,
       };
-      console.log(formData);
-      
-
-      if (isEdit&&id) {
-        await updateMedicine({ id, ...formData }).unwrap();
+      console.log("Submitting data:", formData);
+  
+      if (isEdit && id) {
+        // Attempt to update the medicine
+        const response = await fetchWrapper.put(`/medicine/${id}`, formData);
+        console.log("Update response:", response);
       } else {
-        await fetchWrapper.post("/medicine/create", formData);
+        // Create a new medicine
+        const response = await fetchWrapper.post("/medicine/create", formData);
+        console.log("Create response:", response);
       }
-
+  
       navigate("/medicine-list");
       reset();
     } catch (error) {
       console.error("Error during form submission:", error);
     }
   };
+  
 
   return (
     <div className="max-w-[900px] bg-blue-300 rounded-xl shadow-lg shadow-black-400">

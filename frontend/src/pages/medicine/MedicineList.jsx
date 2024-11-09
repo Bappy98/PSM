@@ -25,10 +25,10 @@ function MedicineList() {
       Header: "Dosages",
       accessor:'dosages'
     },
-    {
-      Header:"Generic",
-      accessor:'generic'
-    },
+    // {
+    //   Header:"Generic",
+    //   accessor:'generic'
+    // },
     {
       Header: "Company",
       accessor:'company.name'

@@ -9,6 +9,5 @@ export const navLinks = [
     text: "Medicine",
    
   
-  },
-  { to: "/contact", text: "Contact" },
+  }
 ];

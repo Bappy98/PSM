@@ -11,7 +11,7 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   return (
-    <nav className="bg-blue-200">
+    <nav className="shadow-md sticky top-0 z-[200] bg-white">
       <header className="h-24  flex justify-items-center items-center justify-between container mx-auto">
       <div className="">
         <img src={logo} alt="Logo" className="h-16 w-16" />

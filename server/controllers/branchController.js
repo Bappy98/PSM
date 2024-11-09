@@ -62,18 +62,17 @@ const getAllBranch = asyncHandler(async (req, res) => {
 
 const findById = asyncHandler(async (req, res) => {
   try {
-    const branch = await Branch.findById(req.params.id);
-    if (!branch) {
-      res.status(404).json({
-        message: "Branch not found",
+    const branches = await Branch.find({ user_id: req.params.id }); // Find all branches by userId
+
+    if (branches.length === 0) {
+      return res.status(404).json({
+        message: "No branches found for this user",
       });
     } else {
-      res.json(branch);
+      res.json(branches);
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error finding branch", error: error.message });
+    res.status(500).json({ message: "Error finding branches", error: error.message });
   }
 });
 

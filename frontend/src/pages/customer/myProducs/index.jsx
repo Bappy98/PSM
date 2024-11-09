@@ -1,12 +1,14 @@
 import { selectCurrentToken } from "@/store/api/auth/authSlice";
+import { removeItem } from "@/store/api/myProduct/myProductSlice";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Product() {
   const { cartItems } = useSelector((state) => state.myProduct);
   const [addMedicine, setAddMedicine] = useState([]);
   const token = useSelector(selectCurrentToken)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(() => {
     const result = cartItems.map((cur) => ({
@@ -32,6 +34,14 @@ function Product() {
         )
     );
 };
+
+const removeProduct = (id) =>{
+  setAddMedicine((prevMedicine) =>
+    prevMedicine.filter((item) => item.medicine !== id)
+);
+dispatch(removeItem(id))
+}
+
 const handleSubmit = (e) => {
   e.preventDefault();
   const orderProduct = {
@@ -44,11 +54,14 @@ const handleSubmit = (e) => {
   }
   navigate('/order-product', { state: orderProduct  });
 };
+console.log(addMedicine);
+
 
   return (
     <form onSubmit={handleSubmit}>
       {addMedicine?.map((item, i) => (
-        <div className="grid grid-cols-12 items-center container mx-auto bg-gray-400" key={i}>
+        <div className="grid grid-cols-12 items-center container mx-auto bg-gray-200 shadow-md" key={i}>
+          <div>{}</div>
           <div className="h-28 w-28 items-center flex col-span-2 m-2">
             <img
               src={item.image}
@@ -75,6 +88,7 @@ const handleSubmit = (e) => {
             onChange={(e) => handleChange(e, i)}
              className="h-8 w-24" />
           </div>
+          <div className="bg-red-500 cursor-pointer  rounded-lg text-center" onClick={()=>removeProduct(item.medicine)} >Remove</div>
         </div>
       ))}
       <div className="flex justify-center">
