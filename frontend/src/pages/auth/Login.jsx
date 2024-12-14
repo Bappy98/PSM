@@ -34,6 +34,8 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const userData = await login(data).unwrap();
+      console.log(data);
+      
       dispatch(setUser({
         accessToken: userData?.token,
         user_id: userData?._id,
